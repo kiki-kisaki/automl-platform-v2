@@ -1,0 +1,40 @@
+Proposal ini merupakan tanggapan tim penyedia jasa atas kebutuhan Sekretariat Badan Geologi, Kementerian ESDM, untuk melaksanakan Pekerjaan Pengembangan Aplikasi e-Government TA 2010, yang terbagi menjadi dua kelompok pekerjaan: Entry Data WebGIS Metadata Badan Geologi dan Pembuatan Audit Sistem Informasi (Master Plan). Kelompok pertama bertujuan memutakhirkan metadata hasil pekerjaan 2009 pada enam kategori data (Logam, Non Logam, Air Tanah, Batu Bara, Panas Bumi, dan Gunung Api) agar dapat dimanfaatkan pihak internal maupun eksternal. Kelompok kedua bertujuan menyusun roadmap pengembangan TI Badan Geologi melalui audit pada lima komponen utama—Systems and Applications, Information Processing Facilities, Systems Development, Management of IT and Enterprise Architecture, serta Client/Server, Telecommunications, Intranets and Extranets—dengan mengacu pada framework internasional COBIT, COSO, dan ISO/IEC 17799:2005.
+Tim kami menawarkan pendekatan kerja terstruktur, mulai dari studi dan analisis permasalahan, penyusunan rencana kerja, pelaksanaan entry data dan audit, hingga penyusunan laporan awal dan akhir, yang dilaksanakan selama 150 hari kalender sejak kontrak ditandatangani oleh tim lintas disiplin di bidang teknologi informasi, geodesi, dan audit sistem informasi. Total estimasi biaya proyek adalah Rp192.400.000, yang telah mencakup biaya tenaga ahli, tenaga pendukung, operasional, pelatihan pengguna, dan penyusunan dokumentasi/pelaporan. Dengan pengalaman tim dan metodologi yang mengacu pada standar internasional, proposal ini menawarkan solusi yang realistis, terukur, dan sesuai dengan sasaran yang ditetapkan Badan Geologi.
+
+2. Latar Belakang & Pernyataan Masalah
+2.1 Latar Belakang
+Lingkungan TI Badan Geologi saat ini masih heterogen dan terpisah-pisah, merupakan gabungan sistem-sistem yang dirancang terpisah untuk kebutuhan spesifik masing-masing unit kerja. Untuk mendukung fungsi Badan Geologi yang profesional, transparan, dan akuntabel, diperlukan koordinasi layanan TI yang lebih terintegrasi. Aplikasi WebGIS – Metadata yang dibangun tahun 2009 perlu terus dirawat dan dimutakhirkan, baik dari sisi kelengkapan data maupun functionality-nya. Selain itu, kompleksitas pengembangan TI ke depan membutuhkan roadmap yang jelas, sehingga diperlukan Audit Sistem Informasi (Master Plan) sebagai dasar pengambilan keputusan investasi TI.
+2.2 Pernyataan Masalah
+
+Data metadata WebGIS hasil 2009 belum seluruhnya terisi/termutakhirkan sehingga belum dimanfaatkan optimal oleh internal maupun eksternal.
+Belum ada evaluasi (audit) menyeluruh terhadap sistem dan aplikasi TI yang berjalan, sehingga sulit memastikan perlindungan aset, integritas data, dan efisiensi penggunaan.
+Belum tersedia roadmap (Master Plan) pengembangan sistem informasi yang terstruktur sebagai acuan investasi TI ke depan.
+Diperlukan tenaga profesional kontraktual dengan kompetensi TI, geodesi, dan audit sistem informasi untuk melaksanakan kedua pekerjaan sesuai standar internasional.
+
+3.1 Maksud dan Tujuan
+Memutakhirkan dan melengkapi data metadata WebGIS agar dimanfaatkan oleh internal, eksternal, maupun instansi lain.
+Meningkatkan kemampuan sistem WebGIS melalui entry data yang terstandar dan user-friendly.
+Menyediakan hasil audit sistem informasi yang menilai kehandalan, efisiensi, dan kontrol sistem yang berjalan.
+Menghasilkan Master Plan sebagai panduan pengembangan sistem informasi yang lebih terstruktur dan optimal.
+
+3.2 Ruang Lingkup Pekerjaan (In-Scope)
+Entry data metadata enam kategori (Logam, Non Logam, Air Tanah, Batu Bara, Panas Bumi, Gunung Api) dengan elemen Identifikasi, Kualitas Data, Organisasi Data Spasial, Acuan Spasial, Entitas dan Atribut, Distribusi, dan Acuan Metadata; pelatihan penggunaan aplikasi bagi user Bandung dan daerah; Audit Sistem Informasi (Master Plan) terhadap lima komponen (Systems and Applications, Information Processing Facilities, Systems Development, Management of IT and Enterprise Architecture, serta Client/Server, Telecommunications, Intranets and Extranets) dengan mengacu framework internasional (COBIT, COSO, ISO/IEC 17799:2005, dan standar terkait lainnya); penyusunan dokumentasi audit (ruang lingkup, metodologi, temuan, ketidaksesuaian, kesimpulan, rekomendasi, jadwal, anggaran); serta Laporan Awal dan Laporan Akhir untuk masing-masing kelompok pekerjaan.
+
+3.3 Batasan Pekerjaan (Out-of-Scope)
+Pengadaan perangkat keras baru di luar yang sudah tersedia.
+Pengembangan modul/aplikasi baru di luar Aplikasi WebGIS – Metadata yang ada; pekerjaan bersifat updating data, bukan pembangunan sistem baru.
+Implementasi/eksekusi rekomendasi Master Plan; pekerjaan terbatas pada penyusunan dokumen audit dan roadmap.
+Pemeliharaan sistem pascapekerjaan di luar masa kontrak.
+
+4. Metodologi & Pendekatan Teknis
+Tim menggunakan pendekatan kerja terstruktur: studi dan analisis permasalahan, penyusunan rencana kerja mengacu KAK, pelaksanaan (perancangan, entry data/pemrograman, uji coba/verifikasi), implementasi, hingga pelaporan. Pendekatan ini sejalan dengan alur kerja KAK Badan Geologi sehingga memudahkan pemantauan kemajuan di setiap tahap.
+
+4.1 Tahapan Kelompok Pekerjaan 1 – Entry Data WebGIS Metadata
+Meliputi pengumpulan dan verifikasi data mentah per kategori (Logam, Non Logam, Air Tanah, Batu Bara, Panas Bumi, Gunung Api); entry data sesuai struktur baku (Identifikasi, Kualitas Data, Organisasi Data Spasial, Acuan Spasial, Entitas dan Atribut, Distribusi, Acuan Metadata); verifikasi silang dengan sumber data asli; pelatihan bagi user Bandung dan daerah; serta penyusunan Laporan Awal dan Laporan Akhir.
+
+4.2 Tahapan Kelompok Pekerjaan 2 – Audit Sistem Informasi (Master Plan)
+Meliputi perencanaan audit (ruang lingkup, metodologi, framework acuan); pengumpulan bukti dan evaluasi terhadap lima komponen audit; identifikasi temuan dan ketidaksesuaian beserta bukti pendukung dan tingkat ketidaksesuaian; penyusunan kesimpulan dan rekomendasi; penyusunan Master Plan sebagai roadmap TI Badan Geologi; serta penyusunan Laporan Awal dan Laporan Akhir.
+
+4.3 Alat/Framework Audit
+Mengacu pada standar internasional: COBIT, COSO, ISO/IEC 17799:2005, FIPS PUB 200, ISO/IEC TR 13335, ISO/IEC 15408/Common Criteria/ITSEC, PRINCE2, PMBOK, TickIT, CMMI, TOGAF 8.1, IT Baseline Protection Manual, dan NIST 800-14.
+

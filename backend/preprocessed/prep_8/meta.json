@@ -1,1 +1,0 @@
-{"classes": ["anjing", "kucing"], "label_groups": {"anjing": ["dogs_set"], "kucing": ["cats_set"]}, "total_images": 1000, "class_counts": {"kucing": 500, "anjing": 500}, "n_features": 1568, "image_size": 64, "grayscale": false}

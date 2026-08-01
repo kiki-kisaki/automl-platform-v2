@@ -1,1 +1,0 @@
-{"feature_columns": ["age", "education-num", "hours-per-week", "occupation"], "target_column": "income", "numeric_cols": [], "categorical_cols": ["age", "education-num", "hours-per-week", "occupation"], "n_samples": 45194, "n_features": 200, "classes": ["<=50k", ">50k"]}

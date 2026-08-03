@@ -16,3 +16,4 @@ MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", "100"))
 PROJECT_ROOT = os.path.abspath(os.path.join(
     os.path.dirname(__file__), "..", ".."))
 ML_SERVICE_PATH = os.path.join(PROJECT_ROOT, "ml_service")
+ENCRYPTION_KEY = os.getenv("ENCRYPTION_KEY", "")

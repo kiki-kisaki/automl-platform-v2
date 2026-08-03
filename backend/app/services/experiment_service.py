@@ -9,6 +9,7 @@ from app.models.dataset import Dataset
 from app.database import SessionLocal
 from app.config import MODEL_DIR, ML_SERVICE_PATH
 from app.schemas.experiment import ALGORITHMS
+from app.services.metadata_service import write_experiment_metadata
 
 
 def create_experiment(
@@ -124,6 +125,8 @@ def run_training_job(experiment_id: int):
             exp.progress = 100
             exp.metrics = result.get("metrics")
             exp.model_path = result.get("model_path")
+            from app.services.metadata_service import write_experiment_metadata
+            write_experiment_metadata(db, exp)
 
         db.commit()
 

@@ -99,6 +99,7 @@ def list_datasets(
                 "original_filename": d.original_filename,
                 "meta":              d.meta,
                 "uploaded_by":       d.uploaded_by,
+                "dataset_role":      d.dataset_role or "general",
             }
             for d in datasets
         ]

@@ -5,6 +5,25 @@ from fastapi import HTTPException, UploadFile
 
 from app.models.dataset import Dataset
 from app.utils.file import save_tabular, save_image_zip, save_text
+from app.models import dataset
+from app.services.metadata_service import write_dataset_metadata
+
+
+def _detect_dataset_role(df) -> str:
+    """Deteksi role dataset berdasarkan nama kolom."""
+    cols = [c.lower().strip() for c in df.columns]
+    has_verbatim = any("verbatim" in c for c in cols)
+    has_coding = any("coding" in c for c in cols)
+    has_analisis = any("analisis" in c or "analysis" in c for c in cols)
+
+    if has_verbatim and has_coding and has_analisis:
+        return "llm_reference"
+    elif has_verbatim and has_coding:
+        return "llm_new"
+    elif has_verbatim:
+        return "llm_raw"
+    else:
+        return "general"
 
 
 def upload_tabular(db: Session, user_id: int, file: UploadFile, name: str) -> Dataset:
@@ -27,6 +46,9 @@ def upload_tabular(db: Session, user_id: int, file: UploadFile, name: str) -> Da
         raise HTTPException(
             status_code=400, detail="File CSV harus memiliki minimal 2 kolom")
 
+    # Deteksi role dataset otomatis
+    dataset_role = _detect_dataset_role(df)
+
     meta = {
         "rows":    len(df),
         "columns": list(df.columns),
@@ -40,10 +62,13 @@ def upload_tabular(db: Session, user_id: int, file: UploadFile, name: str) -> Da
         original_filename=original_filename,
         status="uploaded",
         meta=meta,
+        dataset_role=dataset_role,
     )
     db.add(dataset)
     db.commit()
     db.refresh(dataset)
+    from app.services.metadata_service import write_dataset_metadata
+    write_dataset_metadata(db, dataset)
     return dataset
 
 
@@ -62,6 +87,8 @@ def upload_image(db: Session, user_id: int, file: UploadFile, name: str) -> Data
     db.add(dataset)
     db.commit()
     db.refresh(dataset)
+    from app.services.metadata_service import write_dataset_metadata
+    write_dataset_metadata(db, dataset)
     return dataset
 
 
@@ -89,6 +116,8 @@ def upload_text(db: Session, user_id: int, file: UploadFile, name: str) -> Datas
     db.add(dataset)
     db.commit()
     db.refresh(dataset)
+    from app.services.metadata_service import write_dataset_metadata
+    write_dataset_metadata(db, dataset)
     return dataset
 
 

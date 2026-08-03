@@ -4,8 +4,9 @@ import { getDatasets, toggleDatasetStatus, deleteDatasetApi } from "../../api/da
 import {
     RiFileLine, RiImageLine, RiFileTextLine,
     RiArrowRightLine, RiRefreshLine, RiDatabase2Line,
-    RiDeleteBinLine, RiErrorWarningLine,
+    RiDeleteBinLine, RiErrorWarningLine, RiCloseLine,
 } from "react-icons/ri";
+import api from "../../api/axiosConfig";
 
 const TYPE_CONFIG = {
     tabular: { icon: RiFileLine, color: "var(--role-data_engineer)", label: "Tabular" },
@@ -16,6 +17,7 @@ const TYPE_CONFIG = {
 const STATUS_CONFIG = {
     uploaded: { color: "var(--warning)", bg: "var(--warning-dim)", label: "Belum Diproses" },
     preprocessed: { color: "var(--success)", bg: "var(--success-dim)", label: "Sudah Diproses" },
+    locked: { color: "var(--danger)", bg: "var(--danger-dim)", label: "Terkunci" },
 };
 
 // ── Delete Confirmation Modal ──────────────────────────────────────────────────
@@ -87,7 +89,7 @@ function DeleteModal({ dataset, onConfirm, onCancel }) {
 }
 
 // ── Dataset Card ───────────────────────────────────────────────────────────────
-function DatasetCard({ dataset, onProcess, onToggleStatus, onDelete }) {
+function DatasetCard({ dataset, onProcess, onToggleStatus, onDelete, isSelected }) {
     const type = TYPE_CONFIG[dataset.data_type] || TYPE_CONFIG.tabular;
     const status = STATUS_CONFIG[dataset.status] || STATUS_CONFIG.uploaded;
     const Icon = type.icon;
@@ -130,11 +132,26 @@ function DatasetCard({ dataset, onProcess, onToggleStatus, onDelete }) {
                         </button>
                     )}
 
-                    <button onClick={() => onToggleStatus(dataset)}
-                        title={dataset.status === "uploaded" ? "Tandai sebagai sudah diproses" : "Tandai sebagai belum diproses"}
-                        style={{ padding: "7px 12px", background: "var(--bg-elevated)", color: "var(--text-secondary)", border: "0.5px solid var(--border-strong)", borderRadius: "var(--radius)", fontSize: "12px", cursor: "pointer" }}>
-                        {dataset.status === "uploaded" ? "✓ Tandai Selesai" : "↩ Tandai Belum"}
-                    </button>
+                    {dataset.status === "preprocessed" && (
+                        <span style={{ fontSize: "12px", color: "var(--success)", display: "flex", alignItems: "center", gap: "4px" }}>
+                            ✓ Siap ditraining
+                        </span>
+                    )}
+
+                    {dataset.status === "locked" && (
+                        <span style={{ fontSize: "12px", color: "var(--danger)", display: "flex", alignItems: "center", gap: "4px" }}>
+                            🔒 Tidak dapat diproses
+                        </span>
+                    )}
+
+                    {/* Tombol tandai — sembunyikan kalau locked */}
+                    {dataset.status !== "locked" && (
+                        <button onClick={() => onToggleStatus(dataset)}
+                            title={dataset.status === "uploaded" ? "Tandai sebagai sudah diproses" : "Tandai sebagai belum diproses"}
+                            style={{ padding: "7px 12px", background: "var(--bg-elevated)", color: "var(--text-secondary)", border: "0.5px solid var(--border-strong)", borderRadius: "var(--radius)", fontSize: "12px", cursor: "pointer" }}>
+                            {dataset.status === "uploaded" ? "✓ Tandai Selesai" : "↩ Tandai Belum"}
+                        </button>
+                    )}
 
                     <button onClick={() => onDelete(dataset)}
                         style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", background: "var(--danger-dim)", color: "var(--danger)", border: "0.5px solid var(--danger)", borderRadius: "var(--radius)", cursor: "pointer", flexShrink: 0 }}>
@@ -155,6 +172,9 @@ export default function DatasetListPage() {
     const [error, setError] = useState("");
     const [deleteTarget, setDeleteTarget] = useState(null);
     const navigate = useNavigate();
+    const [selectedDataset, setSelectedDataset] = useState(null);
+    const [lineage, setLineage] = useState(null);
+    const [loadingLineage, setLoadingLineage] = useState(false);
 
     const fetchDatasets = () => {
         setLoading(true);
@@ -163,6 +183,25 @@ export default function DatasetListPage() {
             .then((res) => setDatasets(res.data.data))
             .catch(() => setError("Gagal memuat dataset"))
             .finally(() => setLoading(false));
+    };
+
+    const handleSelectDataset = async (dataset) => {
+        if (selectedDataset?.dataset_id === dataset.dataset_id) {
+            setSelectedDataset(null);
+            setLineage(null);
+            return;
+        }
+        setSelectedDataset(dataset);
+        setLineage(null);
+        setLoadingLineage(true);
+        try {
+            const res = await api.get(`/metadata/dataset/${dataset.dataset_id}`);
+            setLineage(res.data.data);
+        } catch {
+            setLineage(null);
+        } finally {
+            setLoadingLineage(false);
+        }
     };
 
     useEffect(() => { fetchDatasets(); }, [statusFilter]);
@@ -198,6 +237,7 @@ export default function DatasetListPage() {
         total: datasets.length,
         uploaded: datasets.filter((d) => d.status === "uploaded").length,
         preprocessed: datasets.filter((d) => d.status === "preprocessed").length,
+        locked: datasets.filter((d) => d.status === "locked").length,
     };
 
     return (
@@ -214,11 +254,12 @@ export default function DatasetListPage() {
             </div>
 
             {/* Stats */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "20px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "20px" }}>
                 {[
                     { label: "Total Dataset", value: stats.total, color: "var(--text-primary)" },
                     { label: "Belum Diproses", value: stats.uploaded, color: "var(--warning)" },
                     { label: "Sudah Diproses", value: stats.preprocessed, color: "var(--success)" },
+                    { label: "Terkunci", value: stats.locked, color: "var(--danger)" },
                 ].map((s, i) => (
                     <div key={i} style={{ background: "var(--bg-surface)", border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "16px" }}>
                         <p style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "6px" }}>{s.label}</p>
@@ -234,6 +275,7 @@ export default function DatasetListPage() {
                     { value: "all", label: "Semua" },
                     { value: "uploaded", label: "Belum Diproses" },
                     { value: "preprocessed", label: "Sudah Diproses" },
+                    { value: "locked", label: "Terkunci" },
                 ].map((f) => (
                     <button key={f.value} onClick={() => setStatusFilter(f.value)}
                         style={{ padding: "5px 12px", borderRadius: "var(--radius)", fontSize: "12px", fontWeight: "500", border: `0.5px solid ${statusFilter === f.value ? "var(--accent)" : "var(--border-strong)"}`, background: statusFilter === f.value ? "var(--accent-dim)" : "var(--bg-elevated)", color: statusFilter === f.value ? "var(--accent)" : "var(--text-secondary)", cursor: "pointer", transition: "all 0.15s" }}>
@@ -264,38 +306,145 @@ export default function DatasetListPage() {
                 </div>
             )}
 
-            {/* Info hasil filter */}
-            {(statusFilter !== "all" || typeFilter !== "all") && (
-                <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "12px" }}>
-                    Menampilkan {filtered.length} dari {datasets.length} dataset
-                </p>
-            )}
+            <div style={{ display: "grid", gridTemplateColumns: selectedDataset ? "1fr 300px" : "1fr", gap: "20px", alignItems: "start" }}>
+                {/* Kiri — list dataset */}
+                <div>
+                    {(statusFilter !== "all" || typeFilter !== "all") && (
+                        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "12px" }}>
+                            Menampilkan {filtered.length} dari {datasets.length} dataset
+                        </p>
+                    )}
 
-            {loading ? (
-                <div style={{ background: "var(--bg-surface)", border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "40px", textAlign: "center" }}>
-                    <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>Memuat dataset...</p>
+                    {loading ? (
+                        <div style={{ background: "var(--bg-surface)", border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "40px", textAlign: "center" }}>
+                            <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>Memuat dataset...</p>
+                        </div>
+                    ) : filtered.length === 0 ? (
+                        <div style={{ background: "var(--bg-surface)", border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "48px", textAlign: "center" }}>
+                            <RiDatabase2Line size={32} style={{ color: "var(--text-muted)", marginBottom: "10px" }} />
+                            <p style={{ fontSize: "14px", color: "var(--text-secondary)", marginBottom: "4px" }}>Tidak ada dataset</p>
+                            <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
+                                {datasets.length > 0 ? "Coba ubah filter di atas" : "Minta Data Engineer untuk mengupload dataset"}
+                            </p>
+                        </div>
+                    ) : (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                            {filtered.map((d) => (
+                                <div key={d.dataset_id} onClick={() => handleSelectDataset(d)} style={{ cursor: "pointer" }}>
+                                    <DatasetCard
+                                        dataset={d}
+                                        onProcess={handleProcess}
+                                        onToggleStatus={handleToggleStatus}
+                                        onDelete={(dataset) => setDeleteTarget(dataset)}
+                                        isSelected={selectedDataset?.dataset_id === d.dataset_id}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-            ) : filtered.length === 0 ? (
-                <div style={{ background: "var(--bg-surface)", border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "48px", textAlign: "center" }}>
-                    <RiDatabase2Line size={32} style={{ color: "var(--text-muted)", marginBottom: "10px" }} />
-                    <p style={{ fontSize: "14px", color: "var(--text-secondary)", marginBottom: "4px" }}>Tidak ada dataset</p>
-                    <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
-                        {datasets.length > 0 ? "Coba ubah filter di atas" : "Minta Data Engineer untuk mengupload dataset"}
-                    </p>
-                </div>
-            ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                    {filtered.map((d) => (
-                        <DatasetCard
-                            key={d.dataset_id}
-                            dataset={d}
-                            onProcess={handleProcess}
-                            onToggleStatus={handleToggleStatus}
-                            onDelete={(dataset) => setDeleteTarget(dataset)}
-                        />
-                    ))}
-                </div>
-            )}
+
+                {/* Kanan — Lineage Panel */}
+                {selectedDataset && (
+                    <div style={{ position: "sticky", top: "24px" }}>
+                        <div style={{ background: "var(--bg-surface)", border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)", overflow: "hidden" }}>
+                            <div style={{ padding: "12px 16px", borderBottom: "0.5px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--bg-elevated)" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                    <RiDatabase2Line size={14} style={{ color: "var(--accent)" }} />
+                                    <p style={{ fontSize: "12px", fontWeight: "500", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                                        Metadata & Lineage
+                                    </p>
+                                </div>
+                                <button onClick={() => { setSelectedDataset(null); setLineage(null); }}
+                                    style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", display: "flex" }}>
+                                    <RiCloseLine size={16} />
+                                </button>
+                            </div>
+
+                            <div style={{ padding: "16px" }}>
+                                {loadingLineage ? (
+                                    <p style={{ fontSize: "12px", color: "var(--text-muted)", textAlign: "center", padding: "20px" }}>Memuat lineage...</p>
+                                ) : !lineage ? (
+                                    <p style={{ fontSize: "12px", color: "var(--text-muted)", textAlign: "center", padding: "20px" }}>Metadata tidak tersedia</p>
+                                ) : (
+                                    <>
+                                        <div style={{ background: "var(--bg-elevated)", borderRadius: "var(--radius)", padding: "12px", marginBottom: "12px" }}>
+                                            <p style={{ fontSize: "11px", fontWeight: "500", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px" }}>
+                                                Informasi Dataset
+                                            </p>
+                                            {[
+                                                { label: "Nama", value: lineage.name },
+                                                { label: "Tipe Data", value: lineage.data_type },
+                                                { label: "Dibuat", value: new Date(lineage.created_at).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" }) },
+                                                { label: "Baris", value: lineage.properties?.rows ? `${lineage.properties.rows.toLocaleString("id-ID")} baris` : "-" },
+                                                { label: "Kolom", value: lineage.properties?.columns?.length ? `${lineage.properties.columns.length} kolom` : "-" },
+                                                { label: "File Asli", value: lineage.properties?.original_filename || "-" },
+                                                { label: "Dataset Role", value: lineage.properties?.dataset_role || "general" },
+                                            ].map((item, i) => (
+                                                <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: "8px", marginBottom: "6px" }}>
+                                                    <span style={{ fontSize: "12px", color: "var(--text-muted)", flexShrink: 0 }}>{item.label}</span>
+                                                    <span style={{ fontSize: "12px", color: "var(--text-primary)", fontWeight: "500", textAlign: "right", wordBreak: "break-all" }}>{item.value}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div style={{ background: "var(--bg-elevated)", borderRadius: "var(--radius)", padding: "12px" }}>
+                                            <p style={{ fontSize: "11px", fontWeight: "500", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px" }}>
+                                                Data Lineage
+                                            </p>
+                                            <div style={{ position: "relative", paddingLeft: "20px" }}>
+                                                {/* Upload */}
+                                                <div style={{ position: "relative", marginBottom: "14px" }}>
+                                                    <div style={{ position: "absolute", left: "-20px", top: "3px", width: "10px", height: "10px", borderRadius: "50%", background: "var(--role-data_engineer)", border: "2px solid var(--bg-elevated)" }} />
+                                                    <div style={{ position: "absolute", left: "-15px", top: "13px", width: "1px", height: "calc(100% + 4px)", background: "var(--border)" }} />
+                                                    <p style={{ fontSize: "11px", fontWeight: "600", color: "var(--role-data_engineer)", marginBottom: "2px" }}>Upload</p>
+                                                    <p style={{ fontSize: "11px", color: "var(--text-muted)" }}>oleh {lineage.lineage?.uploaded_by || "-"}</p>
+                                                    <p style={{ fontSize: "10px", color: "var(--text-muted)", opacity: 0.7 }}>
+                                                        {lineage.lineage?.upload_time ? new Date(lineage.lineage.upload_time).toLocaleDateString("id-ID") : "-"}
+                                                    </p>
+                                                </div>
+
+                                                {/* Preprocessing */}
+                                                {lineage.lineage?.preprocessings?.length > 0 ? (
+                                                    lineage.lineage.preprocessings.map((prep, i) => (
+                                                        <div key={i} style={{ position: "relative", marginBottom: "14px" }}>
+                                                            <div style={{ position: "absolute", left: "-20px", top: "3px", width: "10px", height: "10px", borderRadius: "50%", background: "var(--role-data_scientist)", border: "2px solid var(--bg-elevated)" }} />
+                                                            <p style={{ fontSize: "11px", fontWeight: "600", color: "var(--role-data_scientist)", marginBottom: "2px" }}>Preprocessing</p>
+                                                            <p style={{ fontSize: "11px", color: "var(--text-muted)" }}>{prep.name || `#${prep.preprocessing_id}`}</p>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div style={{ position: "relative", marginBottom: "14px" }}>
+                                                        <div style={{ position: "absolute", left: "-20px", top: "3px", width: "10px", height: "10px", borderRadius: "50%", background: "var(--border)", border: "2px solid var(--bg-elevated)" }} />
+                                                        <p style={{ fontSize: "11px", color: "var(--text-muted)", fontStyle: "italic" }}>Belum diproses</p>
+                                                    </div>
+                                                )}
+
+                                                {/* Experiments */}
+                                                {lineage.lineage?.experiments?.length > 0 ? (
+                                                    lineage.lineage.experiments.map((exp, i) => (
+                                                        <div key={i} style={{ position: "relative", marginBottom: "14px" }}>
+                                                            <div style={{ position: "absolute", left: "-20px", top: "3px", width: "10px", height: "10px", borderRadius: "50%", background: "var(--role-ml_engineer)", border: "2px solid var(--bg-elevated)" }} />
+                                                            <p style={{ fontSize: "11px", fontWeight: "600", color: "var(--role-ml_engineer)", marginBottom: "2px" }}>Training</p>
+                                                            <p style={{ fontSize: "11px", color: "var(--text-muted)" }}>{exp.name} — {exp.algorithm}</p>
+                                                            <p style={{ fontSize: "10px", color: "var(--text-muted)", opacity: 0.7 }}>oleh {exp.trained_by || "-"}</p>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div style={{ position: "relative" }}>
+                                                        <div style={{ position: "absolute", left: "-20px", top: "3px", width: "10px", height: "10px", borderRadius: "50%", background: "var(--border)", border: "2px solid var(--bg-elevated)" }} />
+                                                        <p style={{ fontSize: "11px", color: "var(--text-muted)", fontStyle: "italic" }}>Belum di-training</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
 
             {/* Delete confirmation modal */}
             {deleteTarget && (

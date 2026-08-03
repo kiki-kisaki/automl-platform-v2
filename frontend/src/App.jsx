@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
-
+import AnalysisHistoryPage from "./pages/viewer/AnalysisHistoryPage";
 import LoginPage from "./pages/LoginPage";
 
 // Admin
@@ -24,6 +24,8 @@ import TrainingPage from "./pages/ml_engineer/TrainingPage";
 // Viewer
 import ViewerLayout from "./layouts/ViewerLayout";
 import ResultsPage from "./pages/viewer/ResultsPage";
+
+import AnalysisPage from "./pages/data_scientist/AnalysisPage";
 
 const ROLE_HOME = {
   admin: "/admin",
@@ -83,6 +85,7 @@ export default function App() {
         }>
           <Route path="datasets" element={<DatasetListPage />} />
           <Route path="preprocess/:datasetId" element={<PreprocessPage />} />
+          <Route path="analysis" element={<AnalysisPage />} />
         </Route>
 
         {/* ML Engineer */}
@@ -102,6 +105,7 @@ export default function App() {
           </PrivateRoute>
         }>
           <Route path="results" element={<ResultsPage />} />
+          <Route path="analysis" element={<AnalysisHistoryPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

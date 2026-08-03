@@ -3,7 +3,9 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from app.routers import auth, admin, datasets, preprocessing, experiments
+from app.routers import auth, admin, datasets, preprocessing, experiments, metadata, privacy_consent, analysis
+
+
 from app.database import init_db
 
 app = FastAPI(title="AutoML Platform v2", version="2.0.0")
@@ -70,3 +72,9 @@ app.include_router(preprocessing.router,
                    prefix="/api/v2/preprocessing", tags=["Preprocessing"])
 app.include_router(experiments.router,
                    prefix="/api/v2/experiments",   tags=["Experiments"])
+app.include_router(
+    metadata.router, prefix="/api/v2/metadata", tags=["Metadata"])
+app.include_router(privacy_consent.router,
+                   prefix="/api/v2/consent", tags=["Privacy Consent"])
+app.include_router(analysis.router, prefix="/api/v2/analysis",
+                   tags=["LLM Analysis"])

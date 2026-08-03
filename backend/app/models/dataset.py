@@ -17,4 +17,5 @@ class Dataset(Base):
     # meta untuk tabular: {rows, columns}
     # meta untuk image:   {classes, total_images, class_counts}
     # meta untuk text:    {total_documents, labels}
+    dataset_role = Column(String, default="general")
     created_at = Column(DateTime, server_default=func.now())

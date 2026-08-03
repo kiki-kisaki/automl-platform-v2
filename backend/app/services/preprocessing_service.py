@@ -8,6 +8,7 @@ from app.models.dataset import Dataset
 from app.models.preprocessing import Preprocessing
 from app.database import SessionLocal
 from app.config import PREPROCESSED_DIR, ML_SERVICE_PATH
+from app.schemas import dataset
 
 
 def _get_dataset(db: Session, dataset_id: int) -> Dataset:
@@ -22,6 +23,12 @@ def create_preprocessing_job(
     config_type: str, name: str, config: dict
 ) -> Preprocessing:
     dataset = _get_dataset(db, dataset_id)
+    # Cek privacy consent dataset locked tidak bisa diproses
+    if dataset.status == "locked":
+        raise HTTPException(
+            status_code=403,
+            detail="Dataset tidak dapat diproses karena ada subjek yang tidak menyetujui pemrosesan data."
+        )
 
     if dataset.status != "uploaded":
         raise HTTPException(
@@ -116,7 +123,9 @@ def run_preprocessing_job(preprocessing_id: int):
             prep.status = "completed"
             prep.output_path = output_path
             dataset.status = "preprocessed"
-
+        # Tulis metadata otomatis
+            from app.services.metadata_service import write_preprocessing_metadata
+            write_preprocessing_metadata(db, prep)
         db.commit()
 
     except Exception as e:

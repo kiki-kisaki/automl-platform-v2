@@ -22,6 +22,7 @@ const ROLE_CONFIG = {
         color: "var(--role-data_scientist)",
         navItems: [
             { to: "/scientist/datasets", label: "Dataset", icon: "📂" },
+            { to: "/scientist/analysis", label: "Analisis LLM", icon: "🧠" },
         ],
     },
     ml_engineer: {
@@ -37,6 +38,7 @@ const ROLE_CONFIG = {
         color: "var(--role-viewer)",
         navItems: [
             { to: "/viewer/results", label: "Hasil Training", icon: "📊" },
+            { to: "/viewer/analysis", label: "History Analisis", icon: "🧠" },
         ],
     },
 };

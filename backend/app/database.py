@@ -22,4 +22,5 @@ def get_db():
 
 def init_db():
     from app.models import user, dataset, preprocessing, experiment
+    from app.models import metadata, privacy_consent, llm_analysis
     Base.metadata.create_all(bind=engine)

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { uploadTabular, uploadImage, uploadText } from "../../api/datasetsApi";
+import { uploadConsentPdf } from "../../api/consentApi";
 import api from "../../api/axiosConfig";
 import {
     RiUploadCloud2Line, RiFileLine, RiImageLine, RiFileTextLine,
-    RiCloseLine, RiCheckboxCircleLine, RiErrorWarningLine,
-    RiAddLine, RiDeleteBinLine, RiShieldCheckLine,
+    RiCloseLine, RiErrorWarningLine, RiAddLine, RiDeleteBinLine,
+    RiShieldCheckLine,
 } from "react-icons/ri";
 
 const DATA_TYPES = [
@@ -34,7 +35,9 @@ const DATA_TYPES = [
 function UploadCard({ type }) {
     const [file, setFile] = useState(null);
     const [name, setName] = useState("");
+    const [textRole, setTextRole] = useState("general");
     const [subjects, setSubjects] = useState([{ nik: "", name: "", agree_store: false, agree_process: false }]);
+    const [pdfFiles, setPdfFiles] = useState({});  // { index: { pdf_filename, original_name } }
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState("");
@@ -42,7 +45,7 @@ function UploadCard({ type }) {
 
     const Icon = type.icon;
 
-    // File handling
+    // ── File dataset ────────────────────────────────────────────────────────────
     const processFile = (f) => {
         if (!f) return;
         const ext = f.name.split(".").pop().toLowerCase();
@@ -56,21 +59,57 @@ function UploadCard({ type }) {
         if (!name) setName(f.name.replace(/\.[^/.]+$/, ""));
     };
 
-    // Subject handlers
+    // ── Subject handlers ────────────────────────────────────────────────────────
     const addSubject = () => setSubjects((p) => [...p, { nik: "", name: "", agree_store: false, agree_process: false }]);
-    const removeSubject = (i) => { if (subjects.length > 1) setSubjects((p) => p.filter((_, idx) => idx !== i)); };
+    const removeSubject = (i) => {
+        if (subjects.length > 1) {
+            setSubjects((p) => p.filter((_, idx) => idx !== i));
+            setPdfFiles((p) => {
+                const next = { ...p };
+                delete next[i];
+                // Re-index
+                const reindexed = {};
+                Object.keys(next).forEach((k) => {
+                    const ki = parseInt(k);
+                    if (ki > i) reindexed[ki - 1] = next[k];
+                    else reindexed[ki] = next[k];
+                });
+                return reindexed;
+            });
+        }
+    };
     const updateSubject = (i, key, value) => setSubjects((p) => p.map((s, idx) => idx === i ? { ...s, [key]: value } : s));
 
-    // Status preview
+    // ── PDF upload per subjek ───────────────────────────────────────────────────
+    const handlePdfUpload = async (i, file) => {
+        if (!file) return;
+        if (!file.name.toLowerCase().endsWith(".pdf")) {
+            setError(`Subjek #${i + 1}: Hanya file PDF yang diperbolehkan`);
+            return;
+        }
+        try {
+            const res = await uploadConsentPdf(file);
+            setPdfFiles((p) => ({ ...p, [i]: res.data.data }));
+            setError("");
+        } catch {
+            setError(`Subjek #${i + 1}: Gagal upload PDF`);
+        }
+    };
+
+    // ── Status preview ──────────────────────────────────────────────────────────
     const allAgreeStore = subjects.every((s) => s.agree_store);
     const allAgreeProcess = subjects.every((s) => s.agree_process);
+    const allHavePdf = subjects.every((_, i) => pdfFiles[i]);
 
-    const statusPreview = !allAgreeStore
-        ? { color: "var(--danger)", bg: "var(--danger-dim)", text: "⚠ Dataset akan dihapus — ada subjek yang tidak setuju penyimpanan" }
-        : !allAgreeProcess
-            ? { color: "var(--warning)", bg: "var(--warning-dim)", text: "⚠ Dataset disimpan tapi tidak bisa diproses" }
-            : { color: "var(--success)", bg: "var(--success-dim)", text: "✓ Dataset akan disimpan dan dapat diproses" };
+    const statusPreview = !allHavePdf
+        ? { color: "var(--danger)", bg: "var(--danger-dim)", text: "⚠ Dataset akan dihapus — ada subjek yang belum upload bukti PDF" }
+        : !allAgreeStore
+            ? { color: "var(--danger)", bg: "var(--danger-dim)", text: "⚠ Dataset akan dihapus — ada subjek yang tidak setuju penyimpanan" }
+            : !allAgreeProcess
+                ? { color: "var(--warning)", bg: "var(--warning-dim)", text: "⚠ Dataset disimpan tapi tidak bisa diproses" }
+                : { color: "var(--success)", bg: "var(--success-dim)", text: "✓ Dataset akan disimpan dan dapat diproses" };
 
+    // ── Submit ──────────────────────────────────────────────────────────────────
     const handleSubmit = async () => {
         if (!file || !name.trim()) {
             setError("File dan nama dataset wajib diisi");
@@ -86,6 +125,10 @@ function UploadCard({ type }) {
                 setError(`Subjek #${i + 1}: NIK harus 16 digit angka`);
                 return;
             }
+            if (!pdfFiles[i]) {
+                setError(`Subjek #${i + 1}: Bukti PDF wajib diupload`);
+                return;
+            }
         }
 
         setLoading(true);
@@ -93,7 +136,7 @@ function UploadCard({ type }) {
         setResult(null);
 
         try {
-            // Step 1 — Upload file
+            // Step 1 — Upload dataset
             let uploadRes;
             if (type.key === "tabular") uploadRes = await uploadTabular(file, name.trim());
             if (type.key === "image") uploadRes = await uploadImage(file, name.trim());
@@ -101,14 +144,30 @@ function UploadCard({ type }) {
 
             const datasetId = uploadRes.data.data.dataset_id;
 
-            // Step 2 — Submit consent
-            const consentRes = await api.post(`/consent/${datasetId}`, { subjects });
+            // Step 2 — Update role kalau TXT
+            if (type.key === "text" && textRole !== "general") {
+                await api.patch(`/datasets/${datasetId}/role`, { dataset_role: textRole });
+            }
+
+            // Step 3 — Submit consent dengan pdf_filename
+            const consentRes = await api.post(`/consent/${datasetId}`, {
+                subjects: subjects.map((s, i) => ({
+                    nik: s.nik.trim(),
+                    name: s.name.trim(),
+                    agree_store: s.agree_store,
+                    agree_process: s.agree_process,
+                    pdf_filename: pdfFiles[i]?.pdf_filename || null,
+                })),
+            });
+
             setResult(consentRes.data.data);
 
             // Reset form
             setFile(null);
             setName("");
+            setTextRole("general");
             setSubjects([{ nik: "", name: "", agree_store: false, agree_process: false }]);
+            setPdfFiles({});
 
         } catch (err) {
             setError(err.response?.data?.message || "Gagal memproses upload");
@@ -145,6 +204,27 @@ function UploadCard({ type }) {
                         style={{ width: "100%", padding: "9px 12px", borderRadius: "var(--radius)", fontSize: "13px" }}
                     />
                 </div>
+
+                {/* Dropdown tipe — hanya untuk TXT */}
+                {type.key === "text" && (
+                    <div style={{ marginBottom: "10px" }}>
+                        <label style={{ display: "block", fontSize: "12px", color: "var(--text-secondary)", marginBottom: "6px" }}>Tipe Dataset</label>
+                        <select value={textRole} onChange={(e) => setTextRole(e.target.value)}
+                            style={{ width: "100%", padding: "9px 12px", borderRadius: "var(--radius)", fontSize: "13px" }}>
+                            <option value="general">Umum — dataset teks biasa</option>
+                            <option value="llm_reference">Referensi LLM — verbatim + coding + analisis</option>
+                            <option value="llm_new">Data Baru LLM — verbatim + coding</option>
+                            <option value="llm_raw">Data Mentah LLM — verbatim saja</option>
+                        </select>
+                        {textRole !== "general" && (
+                            <div style={{ background: "var(--info-dim)", border: "0.5px solid var(--info)", borderRadius: "var(--radius-sm)", padding: "8px 12px", marginTop: "6px", fontSize: "11px", color: "var(--info)" }}>
+                                {textRole === "llm_reference" && "Format per baris: verbatim | coding | analisis"}
+                                {textRole === "llm_new" && "Format per baris: verbatim | coding"}
+                                {textRole === "llm_raw" && "Format per baris: verbatim saja"}
+                            </div>
+                        )}
+                    </div>
+                )}
 
                 {/* Drop zone */}
                 <div
@@ -203,16 +283,17 @@ function UploadCard({ type }) {
                 </div>
 
                 {/* Header tabel subjek */}
-                <div style={{ display: "grid", gridTemplateColumns: "150px 1fr 110px 110px 28px", gap: "6px", marginBottom: "6px", padding: "0 4px" }}>
-                    {["NIK (16 digit)", "Nama Subjek", "Setuju Simpan", "Setuju Proses", ""].map((h, i) => (
+                <div style={{ display: "grid", gridTemplateColumns: "140px 1fr 90px 90px 110px 28px", gap: "6px", marginBottom: "6px", padding: "0 4px" }}>
+                    {["NIK (16 digit)", "Nama Subjek", "Setuju Simpan", "Setuju Proses", "Bukti PDF", ""].map((h, i) => (
                         <span key={i} style={{ fontSize: "10px", fontWeight: "500", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.3px" }}>{h}</span>
                     ))}
                 </div>
 
                 {/* Baris subjek */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "10px" }}>
                     {subjects.map((s, i) => (
-                        <div key={i} style={{ display: "grid", gridTemplateColumns: "150px 1fr 110px 110px 28px", gap: "6px", alignItems: "center" }}>
+                        <div key={i} style={{ display: "grid", gridTemplateColumns: "140px 1fr 90px 90px 110px 28px", gap: "6px", alignItems: "center" }}>
+
                             {/* NIK */}
                             <input type="text" value={s.nik} maxLength={16}
                                 onChange={(e) => updateSubject(i, "nik", e.target.value.replace(/\D/g, ""))}
@@ -249,7 +330,31 @@ function UploadCard({ type }) {
                                 </span>
                             </div>
 
-                            {/* Hapus */}
+                            {/* Upload PDF */}
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                                {pdfFiles[i] ? (
+                                    <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                                        <span style={{ fontSize: "10px", color: "var(--success)" }}>✅</span>
+                                        <span style={{ fontSize: "10px", color: "var(--success)", maxWidth: "70px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                            {pdfFiles[i].original_name}
+                                        </span>
+                                        <button onClick={() => setPdfFiles((p) => { const n = { ...p }; delete n[i]; return n; })}
+                                            style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", display: "flex", padding: 0 }}>
+                                            <RiCloseLine size={11} />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <label style={{ display: "flex", alignItems: "center", gap: "3px", padding: "5px 8px", background: "var(--accent-dim)", color: "var(--accent)", border: "0.5px solid var(--accent)", borderRadius: "var(--radius-sm)", fontSize: "10px", cursor: "pointer", whiteSpace: "nowrap" }}>
+                                        📎 Upload PDF
+                                        <input type="file" accept=".pdf"
+                                            onChange={(e) => handlePdfUpload(i, e.target.files[0])}
+                                            style={{ display: "none" }}
+                                        />
+                                    </label>
+                                )}
+                            </div>
+
+                            {/* Hapus subjek */}
                             <button onClick={() => removeSubject(i)} disabled={subjects.length === 1}
                                 style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "26px", height: "26px", background: subjects.length === 1 ? "transparent" : "var(--danger-dim)", color: subjects.length === 1 ? "var(--text-muted)" : "var(--danger)", border: `0.5px solid ${subjects.length === 1 ? "var(--border)" : "var(--danger)"}`, borderRadius: "var(--radius-sm)", cursor: subjects.length === 1 ? "not-allowed" : "pointer" }}>
                                 <RiDeleteBinLine size={12} />
@@ -264,10 +369,11 @@ function UploadCard({ type }) {
                     <RiAddLine size={13} /> Tambah Subjek
                 </button>
 
-                {/* Ringkasan consent */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", marginBottom: "12px" }}>
+                {/* Ringkasan */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "8px", marginBottom: "12px" }}>
                     {[
                         { label: "Total Subjek", value: subjects.length, color: "var(--text-primary)" },
+                        { label: "Upload PDF", value: `${Object.keys(pdfFiles).length}/${subjects.length}`, color: allHavePdf ? "var(--success)" : "var(--danger)" },
                         { label: "Setuju Simpan", value: `${subjects.filter((s) => s.agree_store).length}/${subjects.length}`, color: allAgreeStore ? "var(--success)" : "var(--danger)" },
                         { label: "Setuju Proses", value: `${subjects.filter((s) => s.agree_process).length}/${subjects.length}`, color: allAgreeProcess ? "var(--success)" : "var(--warning)" },
                     ].map((item, i) => (
@@ -304,13 +410,12 @@ function UploadCard({ type }) {
             {/* Tombol submit */}
             <button onClick={handleSubmit} disabled={!file || loading}
                 style={{ width: "100%", padding: "10px", background: !file || loading ? "var(--bg-elevated)" : type.color, color: !file || loading ? "var(--text-muted)" : "#fff", border: "none", borderRadius: "var(--radius)", fontSize: "13px", fontWeight: "500", cursor: !file || loading ? "not-allowed" : "pointer", transition: "all 0.15s" }}>
-                {loading ? "Memproses..." : `Upload & Submit Consent`}
+                {loading ? "Memproses..." : "Upload & Submit Consent"}
             </button>
         </div>
     );
 }
 
-// ── Main Page ──────────────────────────────────────────────────────────────────
 export default function UploadPage() {
     return (
         <div>
@@ -318,7 +423,6 @@ export default function UploadPage() {
                 <h1 style={{ fontSize: "20px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "4px" }}>Upload Dataset</h1>
                 <p style={{ fontSize: "13px", color: "var(--text-muted)" }}>Upload dataset beserta persetujuan privasi dari setiap subjek data</p>
             </div>
-
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
                 {DATA_TYPES.map((type) => (
                     <UploadCard key={type.key} type={type} />

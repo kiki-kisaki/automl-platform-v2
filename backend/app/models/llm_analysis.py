@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float
 from sqlalchemy.sql import func
 from app.database import Base
 
@@ -11,9 +11,11 @@ class LLMAnalysis(Base):
         Integer, ForeignKey("datasets.id"), nullable=False)
     dataset_new_id = Column(Integer, ForeignKey("datasets.id"), nullable=False)
     created_by = Column(Integer, ForeignKey("users.id"), nullable=False)
-    # JSON string list of {verbatim, coding, analisis}
+    model_name = Column(String, default="qwen2.5:7b")
     results = Column(Text, default="[]")
-    # pending | running | completed | failed
+    rouge_scores = Column(Text, default="{}")
+    generate_time = Column(Float, default=0)
+    avg_length = Column(Float, default=0)
     status = Column(String, default="pending")
     error_message = Column(String, nullable=True)
     created_at = Column(DateTime, server_default=func.now())

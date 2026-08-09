@@ -54,6 +54,11 @@ migrations = [
         error_message        VARCHAR,
         created_at           DATETIME DEFAULT CURRENT_TIMESTAMP
     )""",
+
+    "ALTER TABLE llm_analyses ADD COLUMN model_name VARCHAR DEFAULT 'qwen2.5:7b'",
+    "ALTER TABLE llm_analyses ADD COLUMN rouge_scores TEXT DEFAULT '{}'",
+    "ALTER TABLE llm_analyses ADD COLUMN generate_time REAL DEFAULT 0",
+    "ALTER TABLE llm_analyses ADD COLUMN avg_length REAL DEFAULT 0",
 ]
 
 with engine.connect() as conn:

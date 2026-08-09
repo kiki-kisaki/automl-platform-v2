@@ -24,3 +24,4 @@ class PrivacyConsentSubject(Base):
     name = Column(String, nullable=False)
     agree_store = Column(Integer, nullable=False, default=0)   # 0 | 1
     agree_process = Column(Integer, nullable=False, default=0)   # 0 | 1
+    pdf_path = Column(String, nullable=True)

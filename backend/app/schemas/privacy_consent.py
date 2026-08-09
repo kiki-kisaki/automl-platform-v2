@@ -1,5 +1,5 @@
 from pydantic import BaseModel, field_validator
-from typing import List
+from typing import List, Optional
 
 
 class ConsentSubject(BaseModel):
@@ -7,6 +7,7 @@ class ConsentSubject(BaseModel):
     name:          str
     agree_store:   bool
     agree_process: bool
+    pdf_filename:  Optional[str] = None  # nama file PDF setelah diupload
 
     @field_validator("nik")
     @classmethod

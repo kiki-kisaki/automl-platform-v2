@@ -5,8 +5,10 @@ import {
     RiFileLine, RiImageLine, RiFileTextLine,
     RiArrowRightLine, RiRefreshLine, RiDatabase2Line,
     RiDeleteBinLine, RiErrorWarningLine, RiCloseLine,
+    RiDownload2Line,
 } from "react-icons/ri";
 import api from "../../api/axiosConfig";
+import { getConsent, downloadConsentPdf } from "../../api/consentApi";
 
 const TYPE_CONFIG = {
     tabular: { icon: RiFileLine, color: "var(--role-data_engineer)", label: "Tabular" },
@@ -175,6 +177,38 @@ export default function DatasetListPage() {
     const [selectedDataset, setSelectedDataset] = useState(null);
     const [lineage, setLineage] = useState(null);
     const [loadingLineage, setLoadingLineage] = useState(false);
+    const [consentDetail, setConsentDetail] = useState(null);
+    const [showConsent, setShowConsent] = useState(false);
+    const [loadingConsent, setLoadingConsent] = useState(false);
+
+    const handleViewConsent = async (dataset) => {
+        setShowConsent(true);
+        setConsentDetail(null);
+        setLoadingConsent(true);
+        try {
+            const res = await getConsent(dataset.dataset_id);
+            setConsentDetail({ ...res.data.data, dataset_id: dataset.dataset_id });
+        } catch {
+            setConsentDetail(null);
+        } finally {
+            setLoadingConsent(false);
+        }
+    };
+
+    const handleDownloadPdf = async (datasetId, subjectIndex, subjectName) => {
+        try {
+            const res = await downloadConsentPdf(datasetId, subjectIndex);
+            const url = window.URL.createObjectURL(new Blob([res.data], { type: "application/pdf" }));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", `consent_${subjectName}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch {
+            alert("Gagal download PDF");
+        }
+    };
 
     const fetchDatasets = () => {
         setLoading(true);
@@ -438,6 +472,12 @@ export default function DatasetListPage() {
                                                 )}
                                             </div>
                                         </div>
+                                        {/* Tombol Lihat Consent */}
+                                        <button
+                                            onClick={() => handleViewConsent(selectedDataset)}
+                                            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", width: "100%", padding: "9px", background: "var(--accent-dim)", color: "var(--accent)", border: "0.5px solid var(--accent)", borderRadius: "var(--radius)", fontSize: "12px", fontWeight: "500", cursor: "pointer", marginTop: "12px" }}>
+                                            🛡 Lihat Detail Consent
+                                        </button>
                                     </>
                                 )}
                             </div>
@@ -453,6 +493,79 @@ export default function DatasetListPage() {
                     onConfirm={handleDeleteConfirm}
                     onCancel={() => setDeleteTarget(null)}
                 />
+            )}
+
+            {/* Consent Detail Modal */}
+            {showConsent && (
+                <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 300, backdropFilter: "blur(4px)" }}>
+                    <div style={{ background: "var(--bg-surface)", border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "24px", width: "520px", maxHeight: "80vh", overflowY: "auto", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                <span style={{ fontSize: "16px" }}>🛡</span>
+                                <div>
+                                    <p style={{ fontSize: "15px", fontWeight: "600", color: "var(--text-primary)" }}>Detail Privacy Consent</p>
+                                    <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>{selectedDataset?.name}</p>
+                                </div>
+                            </div>
+                            <button onClick={() => setShowConsent(false)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", display: "flex" }}>
+                                <RiCloseLine size={18} />
+                            </button>
+                        </div>
+
+                        {loadingConsent ? (
+                            <p style={{ fontSize: "13px", color: "var(--text-muted)", textAlign: "center", padding: "20px" }}>Memuat...</p>
+                        ) : !consentDetail ? (
+                            <p style={{ fontSize: "13px", color: "var(--text-muted)", textAlign: "center", padding: "20px" }}>Consent belum disubmit untuk dataset ini</p>
+                        ) : (
+                            <>
+                                {/* Status */}
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "16px" }}>
+                                    {[
+                                        { label: "Status Simpan", value: consentDetail.status_store, color: consentDetail.status_store === "approved" ? "var(--success)" : "var(--danger)" },
+                                        { label: "Status Proses", value: consentDetail.status_process, color: consentDetail.status_process === "approved" ? "var(--success)" : "var(--warning)" },
+                                    ].map((item, i) => (
+                                        <div key={i} style={{ background: "var(--bg-elevated)", borderRadius: "var(--radius)", padding: "10px 12px" }}>
+                                            <p style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "3px" }}>{item.label}</p>
+                                            <p style={{ fontSize: "13px", fontWeight: "600", color: item.color, textTransform: "capitalize" }}>{item.value}</p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Tabel subjek */}
+                                <p style={{ fontSize: "12px", fontWeight: "500", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.4px", marginBottom: "10px" }}>
+                                    Daftar Subjek ({consentDetail.total_subjects} orang)
+                                </p>
+                                <div style={{ background: "var(--bg-elevated)", borderRadius: "var(--radius)", overflow: "hidden", border: "0.5px solid var(--border)" }}>
+                                    {/* Header */}
+                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 80px 80px 100px", gap: "0", padding: "8px 12px", background: "var(--bg-surface)", borderBottom: "0.5px solid var(--border)" }}>
+                                        {["Nama", "Simpan", "Proses", "Bukti PDF"].map((h, i) => (
+                                            <span key={i} style={{ fontSize: "10px", fontWeight: "500", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.3px" }}>{h}</span>
+                                        ))}
+                                    </div>
+                                    {/* Rows */}
+                                    {consentDetail.subjects.map((s, i) => (
+                                        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 80px 80px 100px", gap: "0", padding: "10px 12px", borderBottom: i < consentDetail.subjects.length - 1 ? "0.5px solid var(--border)" : "none", alignItems: "center" }}>
+                                            <span style={{ fontSize: "13px", color: "var(--text-primary)", fontWeight: "500" }}>{s.name}</span>
+                                            <span style={{ fontSize: "12px", color: s.agree_store ? "var(--success)" : "var(--danger)" }}>{s.agree_store ? "✓ Ya" : "✗ Tidak"}</span>
+                                            <span style={{ fontSize: "12px", color: s.agree_process ? "var(--success)" : "var(--warning)" }}>{s.agree_process ? "✓ Ya" : "✗ Tidak"}</span>
+                                            <div>
+                                                {s.has_pdf ? (
+                                                    <button
+                                                        onClick={() => handleDownloadPdf(consentDetail.dataset_id, s.index, s.name)}
+                                                        style={{ display: "flex", alignItems: "center", gap: "4px", padding: "5px 10px", background: "var(--accent-dim)", color: "var(--accent)", border: "0.5px solid var(--accent)", borderRadius: "var(--radius-sm)", fontSize: "11px", cursor: "pointer" }}>
+                                                        <RiDownload2Line size={12} /> Download
+                                                    </button>
+                                                ) : (
+                                                    <span style={{ fontSize: "11px", color: "var(--text-muted)", fontStyle: "italic" }}>Tidak ada</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
             )}
         </div>
     );

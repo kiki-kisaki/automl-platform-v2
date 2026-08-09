@@ -1,0 +1,5728 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass book
+\begin_preamble
+%% \renewcommand{\chapter}[1]{\chapter[#1]{\centering #1}}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{url}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true,frame=single,columns=fullflexible}
+\usepackage{indentfirst}
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries\centering}{\thechapter.}{14pt}{\Huge\MakeUppercase}
+%%-------------
+\newcommand{\Judul}{IMPLEMENTASI \textit{CHATBOT}\textit\ BERBASIS \textit{RETRIEVAL-AUGMENTED GENERATION}\textit\ (RAG) SECARA LOKAL MENGGUNAKAN PLATFORM OLLAMA}
+\newcommand{\JudulInggris}{IMPLEMENTATION OF A CHATBOT BASED ON RETRIEVAL-AUGMENTED GENERATION (RAG) LOCALLY USING THE OLLAMA PLATFORM}
+\newcommand{\Penulis}{Faadhil Riwa Muzakki Muniif}
+\newcommand{\NPM}{50421428}
+\newcommand{\JenisTulisan}{SKRIPSI}
+\newcommand{\Gelar}{S1}
+\newcommand{\Fakultas}{Teknologi Industri}
+\newcommand{\FakultasInggris}{Industrial Technology}
+\newcommand{\Jurusan}{Informatika}
+\newcommand{\JurusanInggris}{Informatics}
+%%-------------
+\newcommand{\Prodi}{Direktorat Program Diploma Tiga Teknologi Informasi}
+\newcommand{\Tahun}{2025}
+\newcommand{\Bulan}{September}
+\newcommand{\Tanggal}{16}
+\newcommand{\Kota}{Jakarta}
+%%-------------
+\newcommand{\KataKunci}{\textit Chatbot \textit, \textit Retrieval-Augmented Generation\textit (RAG), \textit Ollama\textit, \textit Large Language Model \textit(LLM)}
+\newcommand{\KeyWords}{Chatbot, Retrieval-Augmented Generation (RAG), Ollama, Large Language Model (LLM)}
+%%-------------
+\newcommand{\KoordinatorPI}{}
+%%-------------
+\newcommand{\KetuaJurusan}{Prof. Dr. Lintang Yuniar Banowosari, S.Kom., M.Sc.}
+\newcommand{\KetuaPembimbing}{Dr. I Komang Sugiartha, S.Kom, MMSI.}
+\newcommand{\AnggotaPembimbingA}{}
+\newcommand{\AnggotaPembimbingB}{}
+%%------------
+\newcommand{\KetuaUjian}{Dr. Ravi Ahmad Salim, SSi.}
+\newcommand{\SekUjian}{Prof. Dr., Wahyudi Priyono Suwarso.}
+\newcommand{\AnggotaUjianA}{Dr. I Komang Sugiartha, SKom., MMSI.}
+\newcommand{\AnggotaUjianB}{Dr. Ida Astuti, SKom., MMSI.}
+\newcommand{\AnggotaUjianC}{Dr. Miftahul Jannah, SKom., MMSI.}
+%%-------------
+\newcommand{\Ringkasan}{Tulis ringkasan skripsi, pi, atau apa dengan bahasa yang jelas, lugas dan menggambarkan secara singkat tulisan ini.  Sebaiknya tidak lebih dari 150 kata dan sudah menjelaskan dari permasalahan, pembahasan dan penutup.}
+\newcommand{\JumlahPustaka}{}
+\newcommand{\JumlahHalaman}{77}
+\newcommand{\JumlahHalamanDepan}{XV}
+\newcommand{\TahunPustaka}{2019-2025}
+%%
+%% Keterangan administratif sidang sarjana
+%%
+\newcommand{\TanggalSidang}{16 September 2025}
+\newcommand{\TanggalLulus}{16 September 2025}
+\newcommand{\TanggalSah}{}
+\newcommand{\PejabatBagianSidang}{Dr. Edi Sukirman, SSi., MM., M.I.Kom.}
+\setlength{\headheight}{15pt}
+%%-------------
+%%
+%%Untuk Kata pengantar
+%%
+\newcommand{\Rektor}{Prof. DR. Hj. E.S. Margianti, SE, MM.}
+\newcommand{\Dekan}{Prof. Dr. Ing. Adang Suhendra, S.Si., S.Kom., M.Sc.}
+\newcommand{\KotaPenulis}{Jakarta}
+\newcommand{\BlnThn}{2025}
+%%-----------
+%%-----------
+% The following commands set the page numbers on the top right
+% except in the beginning of chapters
+%\lhead{}
+%\chead{}
+%\rhead{\thepage}
+%\lfoot{}
+%\cfoot{}
+%\rfoot{}
+%\renewcommand{\headrulewidth}{0pt}
+
+\usepackage{tocloft}
+% Mengatur judul Daftar Isi, Daftar Gambar, dan Daftar Tabel agar tetap rata tengah dengan ukuran default
+\renewcommand{\cfttoctitlefont}{\hfill\Huge\bfseries}
+\renewcommand{\cftloftitlefont}{\hfill\Huge\bfseries}
+\renewcommand{\cftlottitlefont}{\hfill\Huge\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftafterloftitle}{\hfill}
+\renewcommand{\cftafterlottitle}{\hfill}
+% Membuat daftar khusus untuk lampiran
+\newlistof{appendices}{app}{Daftar Lampiran}
+% Kode untuk mengatur judul Daftar Lampiran
+\makeatletter
+\renewcommand{\listofappendices}{%
+  \chapter*{DAFTAR LAMPIRAN}%
+  \@starttoc{app}%
+}
+\makeatother
+
+
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+
+
+
+% Define custom page numbering style
+\usepackage{fancyhdr}
+\newcommand{\appendixpagenumbering}{
+    \renewcommand{\thepage}{L-\arabic{page}}
+}
+
+
+% Mengatur header dan footer
+\fancypagestyle{romanstyle}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage} % Nomor halaman di tengah bawah
+    \renewcommand{\headrulewidth}{0pt} % Hapus garis header
+    \renewcommand{\footrulewidth}{0pt} % Hapus garis footer
+}
+
+\fancypagestyle{arabicstyle}{
+    \fancyhf{}
+    \fancyhead[R]{\thepage} % Nomor halaman di kanan atas
+    \renewcommand{\headrulewidth}{0pt} % Hapus garis header
+    \renewcommand{\footrulewidth}{0pt} % Hapus garis footer
+}
+
+\fancypagestyle{appendixstyle}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage} % Nomor halaman di tengah bawah
+    \renewcommand{\headrulewidth}{0pt} % Hapus garis header
+    \renewcommand{\footrulewidth}{0pt} % Hapus garis footer
+}
+% Added by lyx2lyx
+%% Variable width box for table cells
+\newenvironment{cellvarwidth}[1][t]
+    {\begin{varwidth}[#1]{\linewidth}}
+    {\@finalstrut\@arstrutbox\end{varwidth}}
+% Added by lyx2lyx
+\usepackage{varwidth}
+% Added by lyx2lyx
+\usepackage{array}
+\end_preamble
+\use_default_options true
+\begin_modules
+natbibapa
+customHeadersFooters
+\end_modules
+\maintain_unincluded_children no
+\language bahasa
+\language_package default
+\inputencoding auto-legacy
+\fontencoding auto
+\font_roman "charter" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref false
+\papersize a4
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style apacite
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Indeks
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 4cm
+\topmargin 4cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+sloppy
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{chapter}{HALAMAN JUDUL}
+\backslash
+pagenumbering{roman}
+\backslash
+pagestyle{romanstyle}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+
+UNIVERSITAS GUNADARMA
+\end_layout
+
+\begin_layout Standard
+\align center
+
+FAKULTAS ILMU KOMPUTER DAN TEKNOLOGI INFORMASI
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+vspace*{10mm}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+includegraphics[width=35mm]{LogoGunadarma.jpg}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+
+SKRIPSI
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+vspace*{5mm}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+
+IMPLEMENTASI KOMPONEN ML SERVICE DAN ANALISIS LLM PADA PLATFORM AUTOMATED MACHINE LEARNING BERBASIS WEBSITE
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+vspace*{8mm}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+
+Disusun Oleh:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Identitas Penulis
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:identitas"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="9cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Keterangan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Isi
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Nama
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA LENGKAP PENULIS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NPM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NPM PENULIS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Program Studi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+PROGRAM STUDI ANDA
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Pembimbing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA DOSEN PEMBIMBING
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+
+Diajukan guna melengkapi sebagian syarat dalam mencapai
+\end_layout
+
+\begin_layout Standard
+\align center
+
+Gelar Sarjana Strata Satu (S1)
+\end_layout
+
+\begin_layout Standard
+\align center
+
+KOTA
+\end_layout
+
+\begin_layout Standard
+\align center
+
+2026
+\end_layout
+
+\begin_layout Chapter*
+
+PERNYATAAN ORIGINALITAS DAN PUBLIKASI
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{chapter}{PERNYATAAN ORIGINALITAS DAN PUBLIKASI}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Saya yang bertanda tangan di bawah ini:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Data Pernyataan
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:pernyataan"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="9cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Keterangan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Isi
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Nama
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA LENGKAP PENULIS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NPM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NPM PENULIS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Judul Skripsi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+IMPLEMENTASI KOMPONEN ML SERVICE DAN ANALISIS LLM PADA PLATFORM AUTOMATED MACHINE LEARNING BERBASIS WEBSITE
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tanggal Sidang
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+TANGGAL SIDANG
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Menyatakan bahwa tulisan ini merupakan hasil karya saya sendiri dan dapat dipublikasikan sepenuhnya oleh Universitas Gunadarma. Segala kutipan telah mengikuti kaidah dan etika yang berlaku. Mengenai isi dan tulisan merupakan tanggung jawab Penulis, bukan Universitas Gunadarma.
+\end_layout
+
+\begin_layout Standard
+\align right
+
+KOTA, 2026
+\end_layout
+
+\begin_layout Standard
+\align right
+
+(NAMA LENGKAP PENULIS)
+\end_layout
+
+\begin_layout Chapter*
+
+LEMBAR PENGESAHAN
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{chapter}{LEMBAR PENGESAHAN}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Data Pengesahan
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:pengesahan"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="9cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Keterangan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Isi
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Judul Skripsi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+IMPLEMENTASI KOMPONEN ML SERVICE DAN ANALISIS LLM PADA PLATFORM AUTOMATED MACHINE LEARNING BERBASIS WEBSITE
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Nama
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA LENGKAP PENULIS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NPM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NPM PENULIS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tanggal Lulus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+TANGGAL LULUS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+
+PANITIA UJIAN
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Panitia Ujian
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:panitia"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="1.2cm">
+<column alignment="left" valignment="top" width="8cm">
+<column alignment="left" valignment="top" width="3.8cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+No.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Nama
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Kedudukan
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA KETUA PENGUJI
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Ketua
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA SEKRETARIS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sekretaris
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA ANGGOTA 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Anggota
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA ANGGOTA 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Anggota
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA ANGGOTA 3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Anggota
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\align center
+
+Menyetujui,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Persetujuan
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:persetujuan"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="6.5cm">
+<column alignment="left" valignment="top" width="6.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Pembimbing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Bagian Sidang Ujian
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA DOSEN PEMBIMBING
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NAMA PEJABAT SIDANG
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Chapter*
+
+ABSTRAK
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{chapter}{ABSTRAK}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+NAMA LENGKAP PENULIS. NPM PENULIS.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+IMPLEMENTASI KOMPONEN ML SERVICE DAN ANALISIS LLM PADA PLATFORM AUTOMATED MACHINE LEARNING BERBASIS WEBSITE. Skripsi. Program Studi Anda, Fakultas Ilmu Komputer dan Teknologi Informasi, Universitas Gunadarma, 2026.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+Kata Kunci: ML Service, Automated Machine Learning, preprocessing, Scikit-learn, Large Language Model, Ollama, ROUGE.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+Penelitian ini mengimplementasikan komponen ML Service dan pipeline analisis LLM pada platform Automated Machine Learning berbasis website. Komponen ML Service mendukung tiga jalur preprocessing: data tabular menggunakan ColumnTransformer, imputasi, penskalaan, one-hot encoding, dan LabelEncoder; data gambar menggunakan resize dan Histogram of Oriented Gradients; serta data teks menggunakan cleaning, stopword opsional, dan TF-IDF. Modul training menyediakan pemilihan algoritma, pembagian data, evaluasi metrik klasifikasi atau regresi, dan pengemasan model bersama artefak preprocessing. Sistem juga mengintegrasikan analisis teks berbasis model bahasa besar lokal melalui Ollama menggunakan few-shot prompting, parsing keluaran, pengukuran waktu generate, rata-rata panjang analisis, dan ROUGE. Pekerjaan panjang dijalankan melalui background task FastAPI agar API dapat mengembalikan identitas pekerjaan lebih awal. Hasil implementasi menunjukkan bahwa pipeline dapat dipanggil secara modular dan menghasilkan artefak, metadata, status, serta metrik yang dapat dipantau. Nilai numerik final perlu diisi berdasarkan dataset eksperimen yang disepakati.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+Draft ini: jumlah halaman dan lampiran disesuaikan setelah finalisasi.
+\end_layout
+
+\begin_layout Chapter*
+
+ABSTRACT
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{chapter}{ABSTRACT}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+NAMA LENGKAP PENULIS. NPM PENULIS.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+IMPLEMENTATION OF AN ML SERVICE COMPONENT AND LLM ANALYSIS IN A WEB-BASED AUTOMATED MACHINE LEARNING PLATFORM. Undergraduate Thesis. Your Study Program, Faculty of Computer Science and Information Technology, Gunadarma University, 2026.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+Keywords: ML Service, Automated Machine Learning, preprocessing, Scikit-learn, Large Language Model, Ollama, ROUGE.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+This study implements an ML Service component and an LLM analysis pipeline in a web-based Automated Machine Learning platform. The ML Service supports three preprocessing paths: tabular data using ColumnTransformer, imputation, scaling, one-hot encoding, and LabelEncoder; image data using resizing and Histogram of Oriented Gradients; and text data using cleaning, optional stopword removal, and TF-IDF. The training module provides algorithm selection, data splitting, classification or regression metrics, and model packaging together with preprocessing artifacts. The system also integrates local large language model analysis through Ollama using few-shot prompting, output parsing, generation time, average output length, and ROUGE. Long-running jobs are executed using FastAPI background tasks so that the API can return a job identifier early. The implementation produces modularly callable pipelines, artifacts, metadata, status, and metrics. Final numerical values must be filled using the agreed experimental datasets.
+\end_layout
+
+\begin_layout Chapter*
+
+KATA PENGANTAR
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{chapter}{KATA PENGANTAR}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Dengan mengucapkan segala puji dan syukur atas kehadirat Allah SWT, penulis dapat menyelesaikan penyusunan skripsi ini. Skripsi ini disusun sebagai salah satu syarat untuk menyelesaikan Program Sarjana Strata Satu di Universitas Gunadarma.
+\end_layout
+
+\begin_layout Standard
+
+Skripsi ini mendokumentasikan kontribusi penulis sebagai ML Engineer pada proyek AutoML Platform v2. Fokus pembahasan diarahkan pada preprocessing multi-tipe data, pengelolaan eksperimen dan training, pengemasan artefak model, serta integrasi analisis teks berbasis LLM lokal. Komponen backend dan frontend yang dikembangkan anggota tim lain dibahas sejauh diperlukan untuk menjelaskan integrasi.
+\end_layout
+
+\begin_layout Standard
+
+Penulis menyampaikan terima kasih kepada dosen pembimbing, seluruh anggota tim, dan semua pihak yang memberikan dukungan selama penelitian. Penulis menyadari bahwa skripsi ini masih dapat dikembangkan. Kritik dan saran yang membangun sangat diharapkan.
+\end_layout
+
+\begin_layout Standard
+\align right
+
+KOTA, 2026
+\end_layout
+
+\begin_layout Standard
+\align right
+
+NAMA LENGKAP PENULIS
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+clearpage
+\backslash
+thispagestyle{romanstyle}
+\backslash
+addcontentsline{toc}{chapter}{DAFTAR ISI}
+\backslash
+renewcommand{\backslash
+contentsname}{DAFTAR ISI}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+clearpage
+\backslash
+thispagestyle{romanstyle}
+\backslash
+addcontentsline{toc}{chapter}{DAFTAR TABEL}
+\backslash
+renewcommand{\backslash
+listtablename}{DAFTAR TABEL}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset FloatList table
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+clearpage
+\backslash
+thispagestyle{romanstyle}
+\backslash
+addcontentsline{toc}{chapter}{DAFTAR GAMBAR}
+\backslash
+renewcommand{\backslash
+listfigurename}{DAFTAR GAMBAR}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset FloatList figure
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+clearpage
+\backslash
+thispagestyle{romanstyle}
+\backslash
+addcontentsline{toc}{chapter}{DAFTAR LAMPIRAN}
+\backslash
+listofappendices
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Chapter
+
+PENDAHULUAN
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+setcounter{page}{1}
+\backslash
+pagenumbering{arabic}
+\backslash
+pagestyle{arabicstyle}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Latar Belakang
+\end_layout
+
+\begin_layout Standard
+
+Perkembangan kecerdasan buatan dan machine learning membuka peluang bagi peneliti untuk mengolah data secara lebih cepat dan berbasis bukti. Namun, proses pembangunan model konvensional membutuhkan pengetahuan pemrograman, statistik, rekayasa data, dan pengelolaan eksperimen. Kesenjangan kompetensi tersebut menjadi hambatan bagi pengguna non-teknis yang memiliki data penelitian tetapi tidak memiliki sumber daya untuk membangun pipeline dari awal. \begin_inset CommandInset citation
+LatexCommand citep
+key "giraldo2025democratizing"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Automated Machine Learning atau AutoML hadir untuk mengurangi beban teknis dengan mengotomatisasi sebagian tahapan pemodelan, seperti transformasi data, pemilihan algoritma, pelatihan, dan evaluasi. Sistem AutoML perlu dirancang agar konfigurasi, status, dan artefak setiap eksperimen dapat ditelusuri. \begin_inset CommandInset citation
+LatexCommand citep
+key "feurer2015efficient"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "hutter2019automl"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Kebutuhan tersebut tidak hanya muncul pada data tabular. Data gambar dan teks memiliki karakteristik berbeda sehingga memerlukan strategi preprocessing yang berbeda. Data tabular membutuhkan imputasi dan encoding, data gambar perlu diubah menjadi representasi numerik, sedangkan data teks perlu dibersihkan dan diubah menjadi fitur berbasis frekuensi kata. \begin_inset CommandInset citation
+LatexCommand citep
+key "pedregosa2011scikit"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "dalal2005hog"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "salton1988term"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Data penelitian kualitatif seperti transkrip wawancara juga membutuhkan analisis semantik yang sering dilakukan secara manual. Large Language Model dapat membantu menghasilkan analisis berbasis contoh, sedangkan eksekusi lokal melalui Ollama dapat mengurangi ketergantungan terhadap layanan cloud. \begin_inset CommandInset citation
+LatexCommand citep
+key "barros2025qualitative"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "ollama2026"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Proyek AutoML Platform v2 mengembangkan komponen ML Service yang terhubung dengan backend FastAPI dan frontend berbasis web. Kontribusi penulis sebagai ML Engineer diarahkan pada preprocessing tabular, gambar, dan teks; training dan eksperimen; packaging model; serta integrasi analisis LLM lokal. \begin_inset CommandInset citation
+LatexCommand citep
+key "kiki2026automl"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Rumusan Masalah
+\end_layout
+
+\begin_layout Standard
+
+Rumusan masalah penelitian ini adalah sebagai berikut:
+\end_layout
+
+\begin_layout Enumerate
+
+Bagaimana merancang ML Service yang dapat memproses data tabular, gambar, dan teks melalui pipeline terpisah dengan kontrak keluaran konsisten?
+\end_layout
+
+\begin_layout Enumerate
+
+Bagaimana mengelola eksperimen dan training secara modular, asinkron, dan dapat dipantau melalui API?
+\end_layout
+
+\begin_layout Enumerate
+
+Bagaimana mengintegrasikan analisis teks berbasis LLM lokal dengan few-shot prompting, parsing, dan evaluasi ROUGE?
+\end_layout
+
+\begin_layout Enumerate
+
+Bagaimana memverifikasi preprocessing, training, packaging, dan analisis LLM melalui skenario pengujian?
+\end_layout
+
+\begin_layout Section
+
+Ruang Lingkup
+\end_layout
+
+\begin_layout Standard
+
+Ruang lingkup penelitian dibatasi pada kontribusi ML Engineer sebagai berikut:
+\end_layout
+
+\begin_layout Enumerate
+
+Data yang didukung adalah CSV tabular, ZIP gambar dengan folder kelas, dan TXT teks.
+\end_layout
+
+\begin_layout Enumerate
+
+Preprocessing tabular menggunakan imputasi, StandardScaler atau MinMaxScaler, OneHotEncoder, dan LabelEncoder.
+\end_layout
+
+\begin_layout Enumerate
+
+Preprocessing gambar menggunakan resize dan HOG. Deep learning dan transfer learning tidak termasuk.
+\end_layout
+
+\begin_layout Enumerate
+
+Preprocessing teks menggunakan cleaning, stopword opsional, TF-IDF, dan LabelEncoder.
+\end_layout
+
+\begin_layout Enumerate
+
+Training menggunakan estimator Scikit-learn yang didefinisikan pada skema eksperimen; pembagian data 80 persen latih dan 20 persen uji dengan random_state 42.
+\end_layout
+
+\begin_layout Enumerate
+
+Analisis LLM menggunakan model lokal yang tersedia di Ollama. ROUGE tidak dianggap sebagai pengganti penilaian ahli.
+\end_layout
+
+\begin_layout Enumerate
+
+Frontend, autentikasi, dan detail basis data dibahas hanya sebagai dependensi integrasi karena merupakan kontribusi anggota tim lain.
+\end_layout
+
+\begin_layout Section
+
+Tujuan Penelitian
+\end_layout
+
+\begin_layout Enumerate
+
+Mengimplementasikan pipeline preprocessing multi-tipe data yang menghasilkan X, y, artefak transformasi, dan metadata.
+\end_layout
+
+\begin_layout Enumerate
+
+Mengimplementasikan modul eksperimen dan training yang memvalidasi konfigurasi, melatih estimator, menghitung metrik, dan menyimpan model.
+\end_layout
+
+\begin_layout Enumerate
+
+Mengintegrasikan analisis LLM lokal dengan few-shot prompting, parsing, waktu generate, panjang keluaran, dan ROUGE.
+\end_layout
+
+\begin_layout Enumerate
+
+Menyusun dokumentasi teknis serta pengujian yang dapat mereproduksi kontribusi ML Engineer.
+\end_layout
+
+\begin_layout Section
+
+Kontribusi Penelitian
+\end_layout
+
+\begin_layout Standard
+
+Kontribusi pertama adalah pemisahan logika machine learning ke dalam ML Service. Backend bertanggung jawab mengatur status dan akses, sedangkan ML Service fokus pada transformasi data, training, evaluasi, dan artefak.
+\end_layout
+
+\begin_layout Standard
+
+Kontribusi kedua adalah pengelolaan artefak. Setiap preprocessing menyimpan X.pkl, y.pkl, artefak transformasi, dan meta.json. Ketika training selesai, model disimpan bersama metadata dan transformasi yang diperlukan.
+\end_layout
+
+\begin_layout Standard
+
+Kontribusi ketiga adalah pipeline analisis LLM lokal yang menggunakan dataset referensi sebagai contoh few-shot dan menyimpan hasil beserta ROUGE, waktu generate, dan rata-rata panjang keluaran.
+\end_layout
+
+\begin_layout Section
+
+Sistematika Penulisan
+\end_layout
+
+\begin_layout Enumerate
+
+Bab I Pendahuluan membahas konteks, masalah, batasan, tujuan, kontribusi, dan sistematika.
+\end_layout
+
+\begin_layout Enumerate
+
+Bab II Tinjauan Pustaka membahas ML Service, AutoML, preprocessing, algoritma, evaluasi, LLM, ROUGE, DSR, Waterfall, dan penelitian terkait.
+\end_layout
+
+\begin_layout Enumerate
+
+Bab III Metode Penelitian membahas pendekatan, arsitektur, rancangan pipeline, artefak, integrasi LLM, dan pengujian.
+\end_layout
+
+\begin_layout Enumerate
+
+Bab IV Hasil dan Pembahasan membahas implementasi dan pengujian modul ML.
+\end_layout
+
+\begin_layout Enumerate
+
+Bab V Penutup berisi kesimpulan dan saran.
+\end_layout
+
+\begin_layout Chapter
+
+TINJAUAN PUSTAKA
+\end_layout
+
+\begin_layout Section
+
+Machine Learning Service
+\end_layout
+
+\begin_layout Standard
+
+ML Service adalah komponen perangkat lunak yang menyediakan fungsi machine learning melalui antarmuka yang dapat dipanggil aplikasi lain. Dalam penelitian ini, ML Service menerima konfigurasi dan lokasi data, menjalankan pipeline, lalu mengembalikan status, metrik, path artefak, dan metadata. API estimator yang konsisten membantu pemisahan fungsi model dari lapisan web. \begin_inset CommandInset citation
+LatexCommand citep
+key "buitinck2013api"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Kontrak keluaran yang konsisten penting karena backend perlu memperbarui status preprocessing atau eksperimen berdasarkan hasil ML Service. Status completed atau failed, pesan kesalahan, dan lokasi artefak menjadi bagian dari kontrak tersebut.
+\end_layout
+
+\begin_layout Section
+
+Automated Machine Learning
+\end_layout
+
+\begin_layout Standard
+
+AutoML mengotomatisasi sebagian atau seluruh proses pembangunan model, termasuk preprocessing, pemilihan algoritma, hyperparameter, training, dan evaluasi. Sistem penelitian ini menerapkan AutoML pada tingkat pipeline dan eksperimen. Pengguna tetap memilih konfigurasi, sementara sistem mengotomatisasi eksekusi, status, evaluasi, dan packaging. \begin_inset CommandInset citation
+LatexCommand citep
+key "feurer2015efficient"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "hutter2019automl"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Pencarian hyperparameter otomatis belum menjadi fokus implementasi. Penambahan Bayesian optimization dapat dijadikan pekerjaan berikutnya. \begin_inset CommandInset citation
+LatexCommand citep
+key "bergstra2011algorithms"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Python dan Scikit-learn
+\end_layout
+
+\begin_layout Standard
+
+Python dipilih karena ekosistem pustaka data science yang luas. Scikit-learn menyediakan API estimator, preprocessing, model selection, dan metrics dengan antarmuka seragam sehingga factory model dapat menerima konfigurasi yang sama. \begin_inset CommandInset citation
+LatexCommand citep
+key "python2026"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "pedregosa2011scikit"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Preprocessing Tabular
+\end_layout
+
+\begin_layout Standard
+
+Preprocessing tabular dimulai dengan membaca CSV. Kolom target dipisahkan dari fitur. Fitur numerik dan kategorikal diproses menggunakan pipeline berbeda. Nilai hilang numerik ditangani dengan median atau modus; kategori menggunakan nilai paling sering. Penskalaan menggunakan StandardScaler, MinMaxScaler, atau tidak dilakukan. Kategori dapat diubah menggunakan OneHotEncoder.
+\end_layout
+
+\begin_layout Standard
+
+ColumnTransformer menerapkan transformasi numerik dan kategorikal dalam satu objek. Objek tersebut disimpan sebagai preprocessor.pkl agar transformasi yang sama dapat digunakan pada data berikutnya. Target kategorikal diubah dengan LabelEncoder.
+\end_layout
+
+\begin_layout Section
+
+Preprocessing Gambar
+\end_layout
+
+\begin_layout Standard
+
+Dataset gambar diunggah sebagai ZIP dengan subfolder kelas. Gambar diubah ukurannya, dikonversi ke RGB atau grayscale, dan diekstraksi menggunakan Histogram of Oriented Gradients. HOG menghasilkan vektor fitur numerik yang dapat digunakan estimator klasik. \begin_inset CommandInset citation
+LatexCommand citep
+key "dalal2005hog"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Preprocessing Teks
+\end_layout
+
+\begin_layout Standard
+
+Pipeline teks menormalisasi huruf, menghapus URL dan karakter non-alfanumerik, merapikan spasi, dan menghapus stopword secara opsional. Teks direpresentasikan dengan TF-IDF yang memberi bobot pada istilah penting bagi dokumen tertentu. \begin_inset CommandInset citation
+LatexCommand citep
+key "salton1988term"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "kowsari2019text"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Algoritma Pembelajaran
+\end_layout
+
+\begin_layout Standard
+
+Decision Tree membentuk aturan keputusan melalui pemisahan fitur, sedangkan Random Forest menggabungkan banyak pohon untuk memperoleh model ensemble yang lebih stabil. \begin_inset CommandInset citation
+LatexCommand citep
+key "quinlan1986induction"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "breiman2001random"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Support Vector Machine mencari batas pemisah dengan margin; Support Vector Regression digunakan untuk regresi. K-Nearest Neighbor memanfaatkan kedekatan sampel dan Logistic Regression digunakan untuk klasifikasi. \begin_inset CommandInset citation
+LatexCommand citep
+key "cortes1995svm"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "cover1967nearest"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Evaluasi Model
+\end_layout
+
+\begin_layout Standard
+
+Metrik klasifikasi yang dihitung adalah accuracy, precision berbobot, recall berbobot, F1-score berbobot, dan confusion matrix. Untuk regresi digunakan MSE, RMSE, MAE, dan R-squared. Nilai-nilai tersebut disimpan dalam field metrics pada record eksperimen.
+\end_layout
+
+\begin_layout Section
+
+Large Language Model dan Ollama
+\end_layout
+
+\begin_layout Standard
+
+Large Language Model mempelajari pola bahasa dari korpus skala besar dan dapat menjalankan tugas pemrosesan bahasa. Few-shot prompting menyertakan contoh pada prompt agar model mengikuti pola keluaran tertentu. \begin_inset CommandInset citation
+LatexCommand citep
+key "brown2020language"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Ollama digunakan sebagai runtime lokal. Backend mengirim model_name dan prompt melalui HTTP ke endpoint generate. Model yang tersedia mengikuti instalasi lingkungan, misalnya mistral:7b, llama3.2:3b, atau qwen2.5:7b. \begin_inset CommandInset citation
+LatexCommand citep
+key "ollama2026"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Few-shot Prompting dan Analisis Kualitatif
+\end_layout
+
+\begin_layout Standard
+
+Dataset referensi berisi verbatim, coding, dan analisis. Tiga baris pertama digunakan sebagai contoh. Dataset llm_new memiliki verbatim dan coding sehingga model menghasilkan analisis, sedangkan llm_raw hanya memiliki verbatim sehingga model menghasilkan coding dan analisis. LLM digunakan sebagai alat bantu dan hasilnya tetap perlu ditinjau ahli. \begin_inset CommandInset citation
+LatexCommand citep
+key "barros2025qualitative"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "shuster2021retrieval"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+ROUGE
+\end_layout
+
+\begin_layout Standard
+
+ROUGE adalah keluarga metrik berbasis overlap antara keluaran dan referensi. Implementasi menghitung ROUGE-1, ROUGE-2, dan ROUGE-L menggunakan f-measure, lalu membulatkan hasil ke empat angka desimal. \begin_inset CommandInset citation
+LatexCommand citep
+key "lin2004rouge"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Pada implementasi ini seluruh teks referensi dan hipotesis digabung sebelum scoring sehingga skor bersifat global. ROUGE mengukur kemiripan tekstual dan tidak cukup untuk menjamin ketepatan makna psikologis.
+\end_layout
+
+\begin_layout Section
+
+Design Science Research
+\end_layout
+
+\begin_layout Standard
+
+DSR berfokus pada penciptaan dan evaluasi artefak untuk menyelesaikan masalah relevan. Artefak penelitian ini adalah ML Service dan integrasinya pada platform AutoML. Tahap DSR diadaptasi menjadi identifikasi masalah, tujuan solusi, desain dan pengembangan, demonstrasi, evaluasi, dan komunikasi. \begin_inset CommandInset citation
+LatexCommand citep
+key "peffers2007dsrm"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Waterfall dan Privacy by Design
+\end_layout
+
+\begin_layout Standard
+
+Waterfall digunakan melalui tahap analisis kebutuhan, desain, implementasi, pengujian, dan pemeliharaan. Privacy by Design menempatkan perlindungan data sejak perancangan; status locked digunakan sebagai gate agar data yang tidak memenuhi persetujuan tidak diproses. \begin_inset CommandInset citation
+LatexCommand citep
+key "cavoukian2011privacy"
+literal "false"
+
+\end_inset \begin_inset CommandInset citation
+LatexCommand citep
+key "republik2022uu"
+literal "false"
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Penelitian Terkait
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ringkasan Penelitian Terkait
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:related"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="3.3cm">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="5.7cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Penelitian
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Fokus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Celah terhadap penelitian ini
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Feurer dkk. (2015)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+AutoML dan optimasi pipeline
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tidak membahas integrasi LLM lokal dan artefak multi-tipe.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Zoller dan Huber (2021)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Survei dan benchmark framework AutoML
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Bukan implementasi platform penelitian dengan gate privacy.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Lewis dkk. (2020)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Retrieval-Augmented Generation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Berfokus pada NLP knowledge-intensive.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Albert dan Voutama (2025)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+RAG lokal menggunakan Ollama
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Berfokus pada chatbot PDF, bukan preprocessing gambar dan training.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Penelitian ini
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+ML Service multi-tipe, training, artefak, dan analisis LLM lokal
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Evaluasi numerik final masih perlu dataset benchmark.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Chapter
+
+METODE PENELITIAN
+\end_layout
+
+\begin_layout Section
+
+Pendekatan DSR
+\end_layout
+
+\begin_layout Standard
+
+Penelitian menggunakan DSR karena keluaran utama berupa artefak perangkat lunak. Artefak terdiri atas library preprocessing dan training pada ml_service, service orchestration pada backend, serta alur analisis LLM.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tahapan DSR
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:dsr"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="3cm">
+<column alignment="left" valignment="top" width="7cm">
+<column alignment="left" valignment="top" width="4cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Tahap
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Aktivitas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Keluaran
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Identifikasi masalah
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Menentukan hambatan pengguna non-teknis dan kebutuhan multi-tipe data.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Pernyataan masalah.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tujuan solusi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Menetapkan pipeline modular, asinkron, dan terpantau.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Spesifikasi tujuan.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Desain dan pengembangan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Merancang fungsi, artefak, endpoint, dan algoritma.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+ML Service.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Demonstrasi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Menjalankan preprocessing, training, dan LLM.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Artefak dan status.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Evaluasi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Menguji jalur valid dan gagal serta metrik.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Matriks pengujian.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Komunikasi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Mendokumentasikan hasil.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Skripsi dan lampiran.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Waterfall
+\end_layout
+
+\begin_layout Enumerate
+
+Analisis kebutuhan: menentukan tipe data, konfigurasi, algoritma, metrik, status, dan artefak.
+\end_layout
+
+\begin_layout Enumerate
+
+Desain: menyusun fungsi preprocessing, training, dan integrasi background task.
+\end_layout
+
+\begin_layout Enumerate
+
+Implementasi: menulis kode Python dan integrasi pustaka.
+\end_layout
+
+\begin_layout Enumerate
+
+Pengujian: memeriksa input, jalur sukses, jalur gagal, status, file, dan metrik.
+\end_layout
+
+\begin_layout Enumerate
+
+Pemeliharaan: menyiapkan struktur agar algoritma, tipe data, dan model baru dapat ditambahkan.
+\end_layout
+
+\begin_layout Section
+
+Batas Kontribusi Tim
+\end_layout
+
+\begin_layout Standard
+
+Data Engineer menangani upload dataset dan consent. Data Scientist menangani konfigurasi preprocessing dan analisis. ML Engineer menangani pipeline ML, training, packaging, dan integrasi analisis LLM. Backend Engineer mengelola API, basis data, autentikasi, dan orkestrasi, sedangkan Frontend Engineer membangun antarmuka.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pembagian Komponen
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:roles"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="3cm">
+<column alignment="left" valignment="top" width="7cm">
+<column alignment="left" valignment="top" width="4cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Komponen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Kontribusi ML Engineer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Integrasi
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Preprocessing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tabular, gambar, teks, metadata, artefak.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+run_preprocessing_job.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Training
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Factory estimator, split, fit, evaluasi, packaging.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+run_training_job.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+LLM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Prompt, parsing, ROUGE, waktu, panjang.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Endpoint analysis dan Ollama.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Privacy gate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Menghormati dataset locked.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Validasi sebelum pipeline.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Arsitektur Sistem
+\end_layout
+
+\begin_layout Standard
+
+Frontend mengirim permintaan ke endpoint. Router memvalidasi autentikasi dan role, service membuat record pekerjaan, dan background task memanggil ML Service. Hasil disimpan sebagai file dan metadata pada basis data. LLM lokal diakses melalui endpoint Ollama.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+\tfilename figures/arsitektur_ml_service.png
+\twidth 92col%
+
+\end_inset
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Arsitektur komponen ML Engineer pada AutoML Platform v2
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:architecture"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Rancangan Pipeline Preprocessing
+\end_layout
+
+\begin_layout Standard
+
+Pipeline menerima dataset_path, config, dan output_path. Pemilihan fungsi berdasarkan config_type. Setiap fungsi mengembalikan status dan meta. Jika gagal, error diteruskan ke record pekerjaan.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+\tfilename figures/pipeline_preprocessing.png
+\twidth 92col%
+
+\end_inset
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pipeline preprocessing tiga tipe data
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:preprocessing"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Konfigurasi dan Artefak
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:artifacts"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="2.4cm">
+<column alignment="left" valignment="top" width="7cm">
+<column alignment="left" valignment="top" width="4.6cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Tipe
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Konfigurasi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Artefak
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tabular
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+target, fitur, missing, scaling, encoding, duplikat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+X.pkl, y.pkl, preprocessor.pkl, target_encoder.pkl, meta.json
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Gambar
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+image_size, grayscale, label_groups
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+X.pkl, y.pkl, meta.json
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Teks
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+labels, edited_texts, stopword, language, max_features
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+X.pkl, y.pkl, vectorizer.pkl, label_encoder.pkl, meta.json
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Rancangan Eksperimen dan Training
+\end_layout
+
+\begin_layout Standard
+
+Pembuatan eksperimen memeriksa preprocessing completed dan algoritma yang diizinkan. Dataset gambar dan teks otomatis menjadi classification. Training memuat X dan y, membagi data 80:20, membuat estimator, fit, prediksi, menghitung metrik, dan menggabungkan model dengan artefak transformasi.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+\tfilename figures/alur_training.png
+\twidth 92col%
+
+\end_inset
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Alur eksperimen dan training
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:training"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Matriks Algoritma
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:algorithms"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="2.5cm">
+<column alignment="left" valignment="top" width="3cm">
+<column alignment="left" valignment="top" width="8.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Data
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Task
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Algoritma
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tabular
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Classification
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Decision Tree, Random Forest, SVM, KNN, Logistic Regression
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tabular
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Linear Regression, Decision Tree, Random Forest, SVR
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Image
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Classification
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+SVM, Random Forest, KNN
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Text
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Classification
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Naive Bayes, Logistic Regression, SVM, Random Forest
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Rancangan Analisis LLM
+\end_layout
+
+\begin_layout Standard
+
+Dataset referensi wajib memiliki role llm_reference. Dataset baru dapat llm_new atau llm_raw. Prompt memuat tiga contoh referensi dan format output. Output Ollama dipecah berdasarkan penanda SEGMEN, dipetakan ke input, lalu disimpan sebagai JSON bersama ROUGE, waktu, dan panjang rata-rata.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+\tfilename figures/alur_llm.png
+\twidth 92col%
+
+\end_inset
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Alur analisis LLM lokal dan evaluasi ROUGE
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:llm"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Rancangan Privacy Gate
+\end_layout
+
+\begin_layout Standard
+
+Dataset locked ditolak sebelum preprocessing atau analisis. Status locked berasal dari alur consent ketika terdapat subjek yang menolak pemrosesan; persetujuan penyimpanan yang tidak lengkap menyebabkan dataset dihapus.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+\tfilename figures/alur_privacy_ml.png
+\twidth 92col%
+
+\end_inset
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gate persetujuan sebelum dataset diproses
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:privacy"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Pemilihan Teknologi dan Pengujian
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Teknologi
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:technology"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="10cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Teknologi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Peran
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Python
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Bahasa ML Service.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Pandas dan NumPy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Manipulasi data dan array.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Scikit-learn
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Preprocessing, estimator, dan metrics.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Pillow dan scikit-image
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Pembacaan gambar dan HOG.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+NLTK
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Stopword.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Joblib
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Serialisasi artefak.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+FastAPI BackgroundTasks
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Pekerjaan asinkron.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Ollama dan HTTPX
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+LLM lokal dan komunikasi HTTP.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Pengujian menggunakan white box berbasis skenario. Selain response API, diperiksa pula status record, keberadaan file, metadata, metrik, dan pesan error.
+\end_layout
+
+\begin_layout Chapter
+
+HASIL DAN PEMBAHASAN
+\end_layout
+
+\begin_layout Section
+
+Lingkungan Implementasi
+\end_layout
+
+\begin_layout Standard
+
+Implementasi berada pada repositori AutoML Platform v2. Backend memakai FastAPI dan SQLAlchemy, sementara fungsi ML berada pada direktori ml_service. Dependensi utama adalah pandas, NumPy, Scikit-learn, Pillow, scikit-image, NLTK, dan joblib. Runtime LLM diakses melalui Ollama lokal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Berkas Fokus
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:files"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="6.5cm">
+<column alignment="left" valignment="top" width="7.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Berkas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Fungsi
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+preprocessing/tabular.py
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+ColumnTransformer dan artefak tabular.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+preprocessing/image.py
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Resize dan HOG.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+preprocessing/text.py
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Cleaning, TF-IDF, dan label.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+training/pipeline.py
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Factory, training, evaluasi, packaging.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+services/preprocessing_service.py
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Orkestrasi preprocessing.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+services/experiment_service.py
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Orkestrasi training.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+routers/analysis.py
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Prompt, Ollama, parsing, ROUGE.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Implementasi Preprocessing Tabular
+\end_layout
+
+\begin_layout Standard
+
+Fungsi run_tabular_preprocessing membaca data, memvalidasi konfigurasi, menghapus duplikat, memisahkan fitur-target, menentukan tipe kolom, membangun pipeline numerik dan kategorikal, fit-transform, lalu menyimpan metadata.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single,language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+df = pd.read_csv(dataset_path, sep=None, engine="python")
+\end_layout
+
+\begin_layout Plain Layout
+target_column = config.get("target_column")
+\end_layout
+
+\begin_layout Plain Layout
+feature_columns = config.get("feature_columns", [])
+\end_layout
+
+\begin_layout Plain Layout
+if target_column not in df.columns:
+\end_layout
+
+\begin_layout Plain Layout
+    return {"status": "failed", "error": "target tidak ditemukan"}
+\end_layout
+
+\begin_layout Plain Layout
+preprocessor = ColumnTransformer(transformers)
+\end_layout
+
+\begin_layout Plain Layout
+X_processed = preprocessor.fit_transform(X)
+\end_layout
+
+\begin_layout Plain Layout
+joblib.dump(X_processed, os.path.join(output_path, "X.pkl"))
+\end_layout
+
+\begin_layout Plain Layout
+joblib.dump(preprocessor, os.path.join(output_path, "preprocessor.pkl"))
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Catatan teknis: pada implementasi saat ini preprocessor di-fit sebelum split data. Untuk evaluasi yang bebas data leakage, transformasi perlu dibungkus bersama estimator dan hanya di-fit pada data training.
+\end_layout
+
+\begin_layout Section
+
+Implementasi Preprocessing Gambar
+\end_layout
+
+\begin_layout Standard
+
+Fungsi run_image_preprocessing membangun mapping folder ke label, memindai ekstensi valid, mengonversi gambar, melakukan resize, dan mengekstraksi HOG. Jika tidak ada gambar valid, status failed dikembalikan.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single,language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+img = Image.open(img_path)
+\end_layout
+
+\begin_layout Plain Layout
+img = img.convert("L" if grayscale else "RGB")
+\end_layout
+
+\begin_layout Plain Layout
+img = img.resize((image_size, image_size))
+\end_layout
+
+\begin_layout Plain Layout
+features = hog(
+\end_layout
+
+\begin_layout Plain Layout
+    np.array(img), orientations=8,
+\end_layout
+
+\begin_layout Plain Layout
+    pixels_per_cell=(8, 8),
+\end_layout
+
+\begin_layout Plain Layout
+    cells_per_block=(2, 2),
+\end_layout
+
+\begin_layout Plain Layout
+    channel_axis=None if grayscale else -1,
+\end_layout
+
+\begin_layout Plain Layout
+)
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Implementasi Preprocessing Teks
+\end_layout
+
+\begin_layout Standard
+
+Fungsi run_text_preprocessing menerapkan edited_texts, cleaning, stopword, TF-IDF, dan LabelEncoder. Minimal dua kelas diperlukan. Matriks TF-IDF diubah menjadi dense array agar kontrak training seragam, tetapi hal ini dapat meningkatkan memori pada korpus besar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single,language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+cleaned = _clean_text(text)
+\end_layout
+
+\begin_layout Plain Layout
+vectorizer = TfidfVectorizer(max_features=max_features, min_df=1)
+\end_layout
+
+\begin_layout Plain Layout
+X = vectorizer.fit_transform(cleaned_texts).toarray()
+\end_layout
+
+\begin_layout Plain Layout
+le = LabelEncoder()
+\end_layout
+
+\begin_layout Plain Layout
+y = le.fit_transform(y_labels_raw)
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Implementasi Training dan Evaluasi
+\end_layout
+
+\begin_layout Standard
+
+Fungsi run_training memuat X dan y serta meta.json, melakukan split 80:20, membuat model melalui factory, melakukan fit dan prediksi, memilih evaluator klasifikasi atau regresi, lalu menyimpan paket model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single,language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+X_train, X_test, y_train, y_test = train_test_split(
+\end_layout
+
+\begin_layout Plain Layout
+    X, y, test_size=0.2, random_state=42
+\end_layout
+
+\begin_layout Plain Layout
+)
+\end_layout
+
+\begin_layout Plain Layout
+model = _get_model(data_type, task_type, algorithm, hyperparameters)
+\end_layout
+
+\begin_layout Plain Layout
+model.fit(X_train, y_train)
+\end_layout
+
+\begin_layout Plain Layout
+y_pred = model.predict(X_test)
+\end_layout
+
+\begin_layout Plain Layout
+metrics = _evaluate_classification(y_test, y_pred)
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Integrasi Background Task
+\end_layout
+
+\begin_layout Standard
+
+Endpoint membuat record pending atau queued, mendaftarkan fungsi pekerjaan, lalu segera mengembalikan ID. Background task membuka sesi basis data, mengubah status running, memanggil ML Service, menyimpan hasil, dan mengubah status completed atau failed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Transisi Status
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:status"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="3cm">
+<column alignment="left" valignment="top" width="5.5cm">
+<column alignment="left" valignment="top" width="5.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Pekerjaan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Sukses
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Gagal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Preprocessing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+pending ke running ke completed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+pending atau running ke failed
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Eksperimen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+queued ke running ke completed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+queued atau running ke failed
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Analisis LLM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+pending ke running ke completed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+pending atau running ke failed
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Implementasi Analisis LLM
+\end_layout
+
+\begin_layout Standard
+
+Fungsi _read_dataset_rows membaca dataset sesuai tipe dan role. _build_prompt memasukkan contoh referensi dan format keluaran. _run_analysis melakukan request asynchronous ke Ollama, mengukur waktu, mem-parse keluaran, menghitung ROUGE, lalu menyimpan hasil.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single,language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+prompt = "Kamu adalah psikolog klinis profesional..."
+\end_layout
+
+\begin_layout Plain Layout
+for i, ex in enumerate(examples, 1):
+\end_layout
+
+\begin_layout Plain Layout
+    prompt += f"CONTOH {i}:\n"
+\end_layout
+
+\begin_layout Plain Layout
+    prompt += f"Verbatim : {ex.get('verbatim', '')}\n"
+\end_layout
+
+\begin_layout Plain Layout
+    prompt += f"Analisis : {ex.get('analisis', '')}\n"
+\end_layout
+
+\begin_layout Plain Layout
+if dataset_role == "llm_raw":
+\end_layout
+
+\begin_layout Plain Layout
+    prompt += "Buatkan CODING dan ANALISIS..."
+\end_layout
+
+\begin_layout Plain Layout
+else:
+\end_layout
+
+\begin_layout Plain Layout
+    prompt += "Buatkan ANALISIS..."
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single,language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+scores = scorer.score(ref_combined, hyp_combined)
+\end_layout
+
+\begin_layout Plain Layout
+return {
+\end_layout
+
+\begin_layout Plain Layout
+    "rouge1": round(scores["rouge1"].fmeasure, 4),
+\end_layout
+
+\begin_layout Plain Layout
+    "rouge2": round(scores["rouge2"].fmeasure, 4),
+\end_layout
+
+\begin_layout Plain Layout
+    "rougeL": round(scores["rougeL"].fmeasure, 4),
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Pengujian Preprocessing
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pengujian Preprocessing
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:testprep"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="3.5cm">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="1.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Fungsi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Skenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Harapan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Hasil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tabular
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Target dan fitur valid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+X, y, preprocessor, metadata tersedia
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tabular
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Target tidak tersedia
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Status failed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Gambar
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Folder kelas berisi gambar
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Fitur HOG dan label tersimpan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Gambar
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Tidak ada gambar valid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Status failed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Teks
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Minimal dua kelas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+TF-IDF dan encoder tersimpan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Teks
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Label kosong atau satu kelas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Status failed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Pengujian Eksperimen dan Training
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pengujian Training
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:testtrain"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="3.5cm">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="1.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Fungsi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Skenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Harapan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Hasil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+create_experiment
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Preprocessing completed, algoritma valid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Record queued dan task dibuat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+create_experiment
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Preprocessing running
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+HTTP 400
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+create_experiment
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Algoritma tidak valid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+HTTP 400
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+run_training
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+X dan y tersedia
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Model dan metrics tersimpan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+download_model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Completed dan file ada
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+File pkl dikirim
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Pengujian Analisis LLM
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pengujian LLM
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:testllm"
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="3.5cm">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="1.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Fungsi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Skenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Harapan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\series bold
+\size scriptsize
+Hasil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+generate_analysis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Role dataset benar dan model ada
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Record pending dibuat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+generate_analysis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Referensi role general
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+HTTP 400
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+generate_analysis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Dataset baru locked
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+HTTP 403
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+_build_prompt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+llm_raw
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Meminta coding dan analisis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+_build_prompt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+llm_new
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Meminta analisis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+_calculate_rouge
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Referensi dan hasil ada
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+ROUGE dalam rentang 0 sampai 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\size scriptsize
+Sesuai
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+\end_inset
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section
+
+Pembahasan dan Keterbatasan
+\end_layout
+
+\begin_layout Standard
+
+Tiga tipe data dapat diperlakukan melalui kontrak seragam berupa status, meta, dan path artefak meskipun transformasi internal berbeda. Packaging model bersama artefak preprocessing mengurangi risiko ketidaksesuaian transformasi ketika model digunakan kembali.
+\end_layout
+
+\begin_layout Standard
+
+Background task menjaga endpoint tetap responsif, tetapi belum menggantikan message queue untuk beban produksi besar. Jika proses aplikasi berhenti, pekerjaan dapat terhenti dan retry belum tersedia.
+\end_layout
+
+\begin_layout Standard
+
+Analisis LLM lokal tidak bergantung pada API cloud, tetapi waktu generate dipengaruhi model, hardware, panjang prompt, dan jumlah segmen. ROUGE memberi indikator tekstual dan tidak otomatis menyatakan analisis kualitatif benar.
+\end_layout
+
+\begin_layout Itemize
+
+Repositori tidak menyertakan dataset benchmark final sehingga skor accuracy, F1, RMSE, dan ROUGE harus diisi setelah eksperimen.
+\end_layout
+
+\begin_layout Itemize
+
+Pembagian data dilakukan sekali dan belum menggunakan cross-validation.
+\end_layout
+
+\begin_layout Itemize
+
+Fit preprocessing sebelum split berpotensi data leakage untuk evaluasi formal.
+\end_layout
+
+\begin_layout Itemize
+
+Belum terdapat worker queue eksternal, retry, cancellation, atau isolasi resource.
+\end_layout
+
+\begin_layout Itemize
+
+Belum ada penilaian ahli untuk validitas semantik keluaran LLM.
+\end_layout
+
+\begin_layout Chapter
+
+PENUTUP
+\end_layout
+
+\begin_layout Section
+
+Kesimpulan
+\end_layout
+
+\begin_layout Standard
+
+Berdasarkan perancangan, implementasi, dan pengujian, kesimpulan penelitian adalah:
+\end_layout
+
+\begin_layout Enumerate
+
+ML Service berhasil dirancang untuk tabular, gambar, dan teks dengan pipeline spesifik serta artefak X, y, metadata, dan transformasi.
+\end_layout
+
+\begin_layout Enumerate
+
+Modul eksperimen dan training berhasil memvalidasi konfigurasi, memilih estimator, melakukan split dan training, menghitung metrik, serta mengemas model.
+\end_layout
+
+\begin_layout Enumerate
+
+Analisis LLM lokal berhasil diintegrasikan dengan Ollama, few-shot prompting, parsing, pengukuran waktu, rata-rata panjang, dan ROUGE.
+\end_layout
+
+\begin_layout Enumerate
+
+Skenario pengujian memverifikasi jalur valid dan error utama. Dataset locked ditolak sebelum preprocessing atau analisis.
+\end_layout
+
+\begin_layout Enumerate
+
+Pemisahan ML Service dari API membantu menjaga keterpisahan tanggung jawab dan memudahkan penambahan algoritma.
+\end_layout
+
+\begin_layout Section
+
+Saran
+\end_layout
+
+\begin_layout Enumerate
+
+Tambahkan dataset benchmark, cross-validation, dan tabel hasil metrik final.
+\end_layout
+
+\begin_layout Enumerate
+
+Pindahkan fit preprocessing ke pipeline evaluasi yang hanya belajar dari data training.
+\end_layout
+
+\begin_layout Enumerate
+
+Tambahkan hyperparameter optimization, versioning dataset-model, dan seed reproducibility.
+\end_layout
+
+\begin_layout Enumerate
+
+Gunakan worker queue, retry, cancellation, dan monitoring resource untuk produksi.
+\end_layout
+
+\begin_layout Enumerate
+
+Tambahkan validasi file model, scanning ZIP, dan pembatasan resource.
+\end_layout
+
+\begin_layout Enumerate
+
+Tambahkan penilaian ahli, evaluasi per segmen, dan uji konsistensi LLM.
+\end_layout
+
+\begin_layout Enumerate
+
+Perluas dukungan ke PyTorch atau TensorFlow, audio, dan time-series.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+clearpage
+\backslash
+phantomsection
+\backslash
+renewcommand{\backslash
+bibname}{DAFTAR PUSTAKA}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "biblio_ml"
+options "bibtotoc,apacite"
+encoding "default"
+
+\end_inset
+\end_layout
+
+\begin_layout Chapter*
+
+LAMPIRAN
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+setcounter{page}{1}
+\backslash
+thispagestyle{appendixstyle}
+\backslash
+pagestyle{appendixstyle}
+\backslash
+addcontentsline{toc}{chapter}{LAMPIRAN}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section*
+
+Lampiran 1 Listing Program ML Service
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{app}{appendices}{Lampiran 1 Listing Program ML Service}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+
+Potongan kode berikut diringkas dari repositori AutoML Platform v2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single,language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+def _evaluate_classification(y_true, y_pred):
+\end_layout
+
+\begin_layout Plain Layout
+    return {
+\end_layout
+
+\begin_layout Plain Layout
+        "accuracy": round(accuracy_score(y_true, y_pred), 4),
+\end_layout
+
+\begin_layout Plain Layout
+        "precision": round(precision_score(
+\end_layout
+
+\begin_layout Plain Layout
+            y_true, y_pred, average="weighted", zero_division=0), 4),
+\end_layout
+
+\begin_layout Plain Layout
+        "recall": round(recall_score(
+\end_layout
+
+\begin_layout Plain Layout
+            y_true, y_pred, average="weighted", zero_division=0), 4),
+\end_layout
+
+\begin_layout Plain Layout
+        "f1_score": round(f1_score(
+\end_layout
+
+\begin_layout Plain Layout
+            y_true, y_pred, average="weighted", zero_division=0), 4),
+\end_layout
+
+\begin_layout Plain Layout
+        "confusion_matrix": confusion_matrix(y_true, y_pred).tolist(),
+\end_layout
+
+\begin_layout Plain Layout
+    }
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single"
+inline false
+status open
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\begin_layout Plain Layout
+  "status": "completed",
+\end_layout
+
+\begin_layout Plain Layout
+  "meta": {
+\end_layout
+
+\begin_layout Plain Layout
+    "n_samples": 100,
+\end_layout
+
+\begin_layout Plain Layout
+    "n_features": 12,
+\end_layout
+
+\begin_layout Plain Layout
+    "classes": ["negatif", "positif"]
+\end_layout
+
+\begin_layout Plain Layout
+  }
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section*
+
+Lampiran 2 Contoh Konfigurasi Eksperimen
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{app}{appendices}{Lampiran 2 Contoh Konfigurasi Eksperimen}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single"
+inline false
+status open
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\begin_layout Plain Layout
+  "config_type": "tabular",
+\end_layout
+
+\begin_layout Plain Layout
+  "target_column": "label",
+\end_layout
+
+\begin_layout Plain Layout
+  "feature_columns": ["usia", "skor", "kategori"],
+\end_layout
+
+\begin_layout Plain Layout
+  "missing_strategy": "median",
+\end_layout
+
+\begin_layout Plain Layout
+  "scaling": "standard",
+\end_layout
+
+\begin_layout Plain Layout
+  "encoding": "onehot",
+\end_layout
+
+\begin_layout Plain Layout
+  "duplicate_strategy": "drop"
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},breaklines=true,frame=single"
+inline false
+status open
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\begin_layout Plain Layout
+  "preprocessing_id": 1,
+\end_layout
+
+\begin_layout Plain Layout
+  "name": "RF tabular baseline",
+\end_layout
+
+\begin_layout Plain Layout
+  "task_type": "classification",
+\end_layout
+
+\begin_layout Plain Layout
+  "algorithm": "random_forest",
+\end_layout
+
+\begin_layout Plain Layout
+  "hyperparameters": {"n_estimators": 100, "random_state": 42}
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Section*
+
+Lampiran 3 Checklist Finalisasi
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{app}{appendices}{Lampiran 3 Checklist Finalisasi}
+\end_layout
+
+\end_inset
+\end_layout
+
+\begin_layout Itemize
+
+Ganti nama, NPM, program studi, pembimbing, kota, tanggal, dan panitia pada preamble.
+\end_layout
+
+\begin_layout Itemize
+
+Tambahkan logo kampus bila diwajibkan.
+\end_layout
+
+\begin_layout Itemize
+
+Isi versi library, hardware, model Ollama, dataset, dan protokol eksperimen yang benar-benar digunakan.
+\end_layout
+
+\begin_layout Itemize
+
+Isi hasil numerik dan screenshot implementasi sebelum sidang.
+\end_layout
+
+\begin_layout Itemize
+
+Periksa semua sumber dan sesuaikan format dengan pedoman kampus.
+\end_layout
+
+\begin_layout Itemize
+
+Kompilasi dua atau tiga kali di LyX agar daftar isi, daftar tabel, daftar gambar, dan bibliografi diperbarui.
+\end_layout
+
+\end_body
+\end_document
